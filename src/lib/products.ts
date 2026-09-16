@@ -1,0 +1,140 @@
+export type CategoryId =
+  | "all"
+  | "whey"
+  | "mass"
+  | "bcaa"
+  | "creatine"
+  | "accessoires";
+
+export type ProductCategory = Exclude<CategoryId, "all">;
+
+export type Product = {
+  id: string;
+  name: string;
+  category: ProductCategory;
+  flavour: string;
+  size: string;
+  price: string;
+  featured: boolean;
+  image: string;
+  alt: string;
+};
+
+export const CATEGORIES: { id: CategoryId; label: string }[] = [
+  { id: "all", label: "Tous" },
+  { id: "whey", label: "Whey" },
+  { id: "mass", label: "Mass gainer" },
+  { id: "bcaa", label: "BCAA" },
+  { id: "creatine", label: "Créatine" },
+  { id: "accessoires", label: "Accessoires" },
+];
+
+export const WHATSAPP_HREF = "https://wa.me/21628700958";
+
+export const PRODUCTS: Product[] = [
+  {
+    id: "whey-isolate-2kg",
+    name: "Whey Isolate 2 kg",
+    category: "whey",
+    flavour: "Chocolat",
+    size: "2 kg",
+    price: "189 DT",
+    featured: true,
+    image: "/products/whey-isolate-2kg.jpg",
+    alt: "Pot de whey isolate Protein Shop 2 kg, saveur chocolat",
+  },
+  {
+    id: "whey-gold-1kg",
+    name: "Whey Concentrate 1 kg",
+    category: "whey",
+    flavour: "Vanille",
+    size: "1 kg",
+    price: "109 DT",
+    featured: true,
+    image: "/products/whey-concentrate-1kg.jpg",
+    alt: "Poche de whey concentrate Protein Shop 1 kg, saveur vanille",
+  },
+  {
+    id: "mass-gainer-5kg",
+    name: "Mass Gainer 5 kg",
+    category: "mass",
+    flavour: "Fraise",
+    size: "5 kg",
+    price: "249 DT",
+    featured: true,
+    image: "/products/mass-gainer-5kg.jpg",
+    alt: "Pot de mass gainer Protein Shop 5 kg, saveur fraise",
+  },
+  {
+    id: "bcaa-300g",
+    name: "BCAA 2:1:1 300 g",
+    category: "bcaa",
+    flavour: "Citron",
+    size: "300 g",
+    price: "79 DT",
+    featured: true,
+    image: "/products/bcaa-300g.jpg",
+    alt: "Boisson BCAA Protein Shop 300 g, saveur citron",
+  },
+  {
+    id: "barres-x12",
+    name: "Barres protéinées x12",
+    category: "accessoires",
+    flavour: "Cookie",
+    size: "12 unités",
+    price: "54 DT",
+    featured: true,
+    image: "/products/barres-x12.jpg",
+    alt: "Barres protéinées Protein Shop x12, saveur cookie",
+  },
+  {
+    id: "shaker-700",
+    name: "Shaker Protein Shop 700 ml",
+    category: "accessoires",
+    flavour: "Noir",
+    size: "700 ml",
+    price: "29 DT",
+    featured: true,
+    image: "/products/shaker-700.jpg",
+    alt: "Shaker Protein Shop 700 ml avec pot de protéines",
+  },
+  {
+    id: "whey-isolate-5kg",
+    name: "Whey Isolate 5 kg",
+    category: "whey",
+    flavour: "Cookies",
+    size: "5 kg",
+    price: "399 DT",
+    featured: false,
+    image: "/products/whey-isolate-5kg.jpg",
+    alt: "Pot de whey isolate Protein Shop 5 kg, saveur cookies",
+  },
+  {
+    id: "mass-gainer-3kg",
+    name: "Mass Gainer 3 kg",
+    category: "mass",
+    flavour: "Chocolat",
+    size: "3 kg",
+    price: "169 DT",
+    featured: false,
+    image: "/products/mass-gainer-3kg.jpg",
+    alt: "Gammes de pots et sachets Protein Shop, mass gainer 3 kg",
+  },
+  {
+    id: "creatine-300g",
+    name: "Créatine Creapure 300 g",
+    category: "creatine",
+    flavour: "Neutre",
+    size: "300 g",
+    price: "69 DT",
+    featured: true,
+    image: "/products/creatine-300g.jpg",
+    alt: "Pot de créatine Protein Shop 300 g avec shaker",
+  },
+];
+
+export const FEATURED_PRODUCTS = PRODUCTS.filter((product) => product.featured);
+
+export function isCategoryId(value: string | undefined): value is CategoryId {
+  return CATEGORIES.some((category) => category.id === value);
+}

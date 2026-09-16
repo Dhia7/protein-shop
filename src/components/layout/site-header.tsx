@@ -2,34 +2,72 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
-import { Dumbbell, Menu, MessageCircle, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { WHATSAPP_HREF } from "@/lib/products";
-import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import { CartDrawer } from "@/components/cart-drawer";
+import { useCart } from "@/components/cart-provider";
+import { useLocale } from "@/components/locale-provider";
+import { SiteLogo } from "@/components/site-logo";
+import { NAV_LINKS, WRAP } from "@/lib/site";
+import type { Locale } from "@/lib/i18n";
 
-const NAV = [
-  { href: "/", label: "Accueil" },
-  { href: "/catalogue", label: "Catalogue" },
-  { href: "/contact", label: "Contact" },
-];
+function LanguageToggle() {
+  const { locale, setLocale, t } = useLocale();
 
-function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  return (
+    <div
+      className="flex gap-0.5 rounded-full border border-line p-[5px_4px] text-xs font-bold"
+      role="group"
+      aria-label={t("language")}
+    >
+      {(["fr", "ar"] as const).map((code) => {
+        const active = locale === code;
+        return (
+          <button
+            key={code}
+            type="button"
+            className={
+              active
+                ? "rounded-full bg-primary px-2.5 py-[3px] text-[12px] font-bold text-[#111]"
+                : "rounded-full bg-transparent px-2.5 py-[3px] text-[12px] font-bold text-chalk-dim"
+            }
+            aria-pressed={active}
+            onClick={() => setLocale(code as Locale)}
+          >
+            {code.toUpperCase()}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function CartButton() {
+  const { count, setOpen } = useCart();
+  const { t } = useLocale();
+
+  return (
+    <button
+      type="button"
+      className="relative flex size-[38px] items-center justify-center rounded-full border border-line text-foreground"
+      aria-label={t("cartLabel")}
+      onClick={() => setOpen(true)}
+    >
+      <span className="text-[16px] leading-none" aria-hidden>
+        🛒
+      </span>
+      {count > 0 ? (
+        <span className="absolute -top-1 -end-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-extrabold text-[#111]">
+          {count > 9 ? "9+" : count}
+        </span>
+      ) : null}
+    </button>
+  );
 }
 
 export function SiteHeader() {
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { t } = useLocale();
+  const { open: cartOpen, setOpen: setCartOpen } = useCart();
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -47,144 +85,107 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!cartOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setCartOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [cartOpen, setCartOpen]);
+
   return (
     <>
-      <header
-        className={cn(
-          "sticky top-0 z-50 border-b border-primary/20 bg-background/70 backdrop-blur-xl transition-[background-color,box-shadow,padding] duration-300",
-          scrolled && "bg-background/90 shadow-black/40 shadow-sm",
-        )}
-      >
-        <div
-          className={cn(
-            "mx-auto flex max-w-6xl items-center gap-3 px-4 md:px-6",
-            scrolled ? "py-2" : "py-3",
-          )}
-        >
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm font-semibold tracking-wide text-primary"
-          >
-            <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 ring-1 ring-primary/30">
-              <Dumbbell className="size-4" aria-hidden />
-            </span>
-            Protein Shop
-          </Link>
-
-          <nav className="ml-4 hidden items-center gap-1 sm:flex" aria-label="Principal">
-            {NAV.map((item) => {
-              const active = isActive(pathname, item.href);
-              return (
-                <Link
-                  key={item.href}
+      <nav className="sticky top-0 z-50 border-b border-line bg-[color-mix(in_srgb,var(--color-iron)_92%,transparent)] backdrop-blur-[8px]">
+        <div className={`${WRAP} flex h-[76px] items-center justify-between`}>
+          <SiteLogo />
+          <ul className="hidden list-none gap-8 text-sm font-semibold tracking-[0.02em] lg:flex">
+            {NAV_LINKS.map((item) => (
+              <li key={item.href}>
+                <a
                   href={item.href}
-                  className={cn(
-                    "relative rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground",
-                    active && "text-primary-foreground hover:text-primary-foreground",
-                  )}
+                  className="text-foreground no-underline opacity-85 transition-opacity hover:opacity-100"
                 >
-                  {active ? (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-primary"
-                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                    />
-                  ) : null}
-                  <span className="relative z-10">{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="ml-auto flex items-center gap-2">
-            <Button asChild size="sm">
-              <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">
-                <MessageCircle />
-                WhatsApp
-              </a>
-            </Button>
-            <Button
+                  {t(item.labelKey)}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-[18px]">
+            <LanguageToggle />
+            <CartButton />
+            <button
               type="button"
-              size="icon-sm"
-              variant="outline"
-              className="sm:hidden"
+              className="flex size-[38px] items-center justify-center rounded-full border border-line lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
               onClick={() => setMenuOpen((open) => !open)}
             >
-              {menuOpen ? <X /> : <Menu />}
-            </Button>
+              {menuOpen ? (
+                <X className="size-4" aria-hidden />
+              ) : (
+                <Menu className="size-4" aria-hidden />
+              )}
+            </button>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <AnimatePresence>
-        {menuOpen ? (
-          <motion.div
-            key="mobile-nav"
-            className="fixed inset-0 z-[60] sm:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+      <CartDrawer />
+
+      {menuOpen ? (
+        <div className="fixed inset-0 z-[60] lg:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/55"
+            aria-label="Fermer le menu"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div
+            id="mobile-nav"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+            className="absolute inset-y-0 end-0 flex w-[min(20rem,88vw)] flex-col gap-6 border-s border-line bg-iron-2 p-5 pt-16"
           >
             <button
               type="button"
-              className="absolute inset-0 bg-black/55 backdrop-blur-sm"
+              className="absolute top-4 end-4 flex size-[38px] items-center justify-center rounded-full border border-line"
               aria-label="Fermer le menu"
               onClick={() => setMenuOpen(false)}
-            />
-            <motion.div
-              id="mobile-nav"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Navigation"
-              className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col gap-6 overflow-y-auto border-l border-primary/25 bg-card p-5 pt-16 shadow-2xl"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 380, damping: 36 }}
             >
-              <Button
-                type="button"
-                size="icon-sm"
-                variant="outline"
-                className="absolute top-4 right-4"
-                aria-label="Fermer le menu"
-                onClick={() => setMenuOpen(false)}
-              >
-                <X />
-              </Button>
-              <nav className="flex flex-col gap-1">
-                {NAV.map((item) => {
-                  const active = isActive(pathname, item.href);
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "rounded-lg px-3 py-2.5 text-base text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                        active &&
-                          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-              <Button asChild>
-                <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle />
-                  Commander sur WhatsApp
+              <X className="size-4" aria-hidden />
+            </button>
+            <nav className="flex flex-col gap-1">
+              {NAV_LINKS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-[2px] px-3 py-2.5 text-base text-foreground no-underline hover:bg-iron"
+                >
+                  {t(item.labelKey)}
                 </a>
-              </Button>
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+              ))}
+              <Link
+                href="/catalogue"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-[2px] px-3 py-2.5 text-base text-foreground no-underline hover:bg-iron"
+              >
+                {t("navCatalogue")}
+              </Link>
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-[2px] px-3 py-2.5 text-base text-foreground no-underline hover:bg-iron"
+              >
+                {t("navContact")}
+              </Link>
+            </nav>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

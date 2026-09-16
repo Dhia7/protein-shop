@@ -1,59 +1,61 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { WHATSAPP_HREF, type Product } from "@/lib/products";
+"use client";
 
-export function ProductCard({ product }: { product: Product }) {
-  const message = encodeURIComponent(
-    `Bonjour Protein Shop, je souhaite commander : ${product.name} (${product.flavour}, ${product.size}).`,
-  );
+import Image from "next/image";
+import { useCart } from "@/components/cart-provider";
+import { useLocale } from "@/components/locale-provider";
+import { productImageSrc, type Product } from "@/lib/products";
+
+export function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
+  const { addItem } = useCart();
+  const { t } = useLocale();
 
   return (
-    <Card className="h-full motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-1">
-      <div className="relative aspect-[4/3] bg-background">
+    <article className="flex flex-col overflow-hidden rounded-[2px] border border-line bg-iron-2">
+      <div className="relative flex h-[220px] items-center justify-center bg-[#ece8df]">
+        {product.tag ? (
+          <span className="absolute top-3 start-3 z-[1] rounded-full bg-primary px-2.5 py-1 text-[10px] font-extrabold tracking-[0.03em] text-[#14100D]">
+            {product.tag}
+          </span>
+        ) : null}
         <Image
-          src={product.image}
+          src={productImageSrc(product)}
           alt={product.alt}
           fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover"
+          priority={priority}
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          className="object-contain p-3"
         />
       </div>
-      <CardHeader>
-        <div className="flex items-start justify-between gap-2">
-          <CardTitle>{product.name}</CardTitle>
-          <Badge>{product.price}</Badge>
-        </div>
-        <CardDescription>
-          {product.flavour} · {product.size}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground">Paiement à la livraison.</p>
-      </CardContent>
-      <CardFooter className="gap-2">
-        <Button asChild className="flex-1">
-          <a
-            href={`${WHATSAPP_HREF}?text=${message}`}
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="flex flex-1 flex-col px-[18px] pt-[18px] pb-[22px]">
+        <h4 className="mb-1 text-base font-bold">{product.name}</h4>
+        <p className="mb-3.5 text-xs text-chalk-dim">
+          {product.size} · {product.flavour}
+        </p>
+        <div className="mt-auto flex items-center justify-between">
+          <div className="font-display text-xl leading-none uppercase">
+            {product.price}
+            {product.detail ? (
+              <small className="mt-1 block font-sans text-[11px] font-semibold normal-case text-chalk-dim">
+                {product.detail}
+              </small>
+            ) : null}
+          </div>
+          <button
+            type="button"
+            aria-label={`${t("addToCart")} ${product.name}`}
+            className="flex size-[34px] items-center justify-center rounded-full bg-primary text-lg font-extrabold text-[#14100D]"
+            onClick={() => addItem(product)}
           >
-            Commander
-          </a>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href="/catalogue">Catalogue</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+            +
+          </button>
+        </div>
+      </div>
+    </article>
   );
 }

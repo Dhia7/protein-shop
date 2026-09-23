@@ -23,8 +23,8 @@ function TrustTrack({ "aria-hidden": ariaHidden }: { "aria-hidden"?: boolean }) 
 
 export function TrustBar() {
   return (
-    <div className="overflow-hidden border-b border-line bg-primary text-[#14100D]">
-      <div className="trust-marquee flex w-max py-3.5 text-sm font-extrabold tracking-[0.03em] will-change-transform">
+    <div className="trust-bar overflow-hidden border-b border-line bg-primary text-[#14100D]">
+      <div className="trust-marquee flex w-max py-3.5 text-sm font-extrabold tracking-[0.03em]">
         <TrustTrack />
         <TrustTrack aria-hidden />
       </div>

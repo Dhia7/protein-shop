@@ -1,26 +1,28 @@
-import Image from "next/image";
+import { BlurImage } from "@/components/blur-image";
+import { RevealItem, RevealStagger } from "@/components/reveal";
 import { SectionHead } from "@/components/section-head";
+import { UGC_IMAGES } from "@/lib/media";
 import { WRAP } from "@/lib/site";
 
 const TILES = [
   {
     label: "@karim.fit",
-    image: "/products/whey-isolate-2kg.jpg",
+    image: UGC_IMAGES.wheyIsolate,
     alt: "Whey isolate Protein Shop utilisée en salle",
   },
   {
     label: "Iron Club Ariana",
-    image: "/products/creatine-300g.jpg",
+    image: UGC_IMAGES.creatine,
     alt: "Créatine Protein Shop au Iron Club Ariana",
   },
   {
     label: "@sarra_lifts",
-    image: "/products/mass-gainer-5kg.jpg",
-    alt: "Mass gainer Protein Shop",
+    image: UGC_IMAGES.massGainer,
+    alt: "Mass Gainer Protein Shop",
   },
   {
     label: "Powerhouse Sousse",
-    image: "/products/shaker-700.jpg",
+    image: UGC_IMAGES.shaker,
     alt: "Shaker Protein Shop à Powerhouse Sousse",
   },
 ];
@@ -54,38 +56,36 @@ export function UgcSection() {
           }
           description="Vrais clients, vraies salles — pas des mannequins fitness."
         />
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <RevealStagger className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {TILES.map((tile) => (
-            <div
-              key={tile.label}
-              className="relative flex aspect-square items-end overflow-hidden rounded-[2px] p-3.5"
-            >
-              <Image
-                src={tile.image}
-                alt={tile.alt}
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover"
-              />
-              <span className="relative z-[1] rounded-full bg-[rgba(16,17,20,0.7)] px-2.5 py-1 text-xs font-bold">
-                {tile.label}
-              </span>
-            </div>
+            <RevealItem key={tile.label}>
+              <div className="relative flex aspect-square items-end overflow-hidden rounded-[2px] p-3.5">
+                <BlurImage
+                  src={tile.image}
+                  alt={tile.alt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className="object-cover"
+                />
+                <span className="relative z-[1] rounded-full bg-[rgba(16,17,20,0.7)] px-2.5 py-1 text-xs font-bold">
+                  {tile.label}
+                </span>
+              </div>
+            </RevealItem>
           ))}
-        </div>
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+        </RevealStagger>
+        <RevealStagger className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
           {QUOTES.map((quote) => (
-            <blockquote
-              key={quote.who}
-              className="border-l-[3px] border-primary pl-5"
-            >
-              <p className="mb-3.5 text-[15px]">&quot;{quote.text}&quot;</p>
-              <footer className="text-[13px] font-bold text-chalk-dim">
-                {quote.who}
-              </footer>
-            </blockquote>
+            <RevealItem key={quote.who}>
+              <blockquote className="border-l-[3px] border-primary pl-5">
+                <p className="mb-3.5 text-[15px]">&quot;{quote.text}&quot;</p>
+                <footer className="text-[13px] font-bold text-chalk-dim">
+                  {quote.who}
+                </footer>
+              </blockquote>
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </section>
   );

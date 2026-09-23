@@ -1,7 +1,13 @@
+"use client";
+
 import { MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { WHATSAPP_HREF } from "@/lib/products";
 
 export function WhatsAppFab() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/produit")) return null;
+
   return (
     <a
       href={WHATSAPP_HREF}

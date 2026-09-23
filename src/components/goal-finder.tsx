@@ -44,10 +44,16 @@ export function GoalFinder() {
           {GOALS.map((goal) => (
             <article
               key={goal.num}
-              className="bg-iron-2 px-[30px] py-10 transition-colors hover:bg-iron"
+              className="goal-card group relative z-0 bg-iron-2 px-[30px] py-10 transition-colors hover:z-[1] hover:bg-iron"
             >
               <span className="font-display mb-5 block text-sm text-primary">
-                {goal.num}
+                <span className="goal-num-digits inline-block origin-center transition-transform duration-300 ease-out group-hover:scale-110">
+                  {goal.num}
+                </span>
+                <span
+                  aria-hidden
+                  className="goal-num-bar mt-1.5 block h-px w-[1.6em] origin-start scale-x-0 bg-primary transition-transform duration-300 ease-out group-hover:scale-x-100"
+                />
               </span>
               <h3 className="font-display mb-2.5 text-[26px] uppercase">
                 {goal.title}

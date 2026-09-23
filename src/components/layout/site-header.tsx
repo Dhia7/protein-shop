@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { animate } from "motion/react";
 import { CartDrawer } from "@/components/cart-drawer";
 import { useCart } from "@/components/cart-provider";
 import { useLocale } from "@/components/locale-provider";
 import { SiteLogo } from "@/components/site-logo";
 import { NAV_LINKS, WRAP } from "@/lib/site";
 import type { Locale } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
 function LanguageToggle() {
   const { locale, setLocale, t } = useLocale();
@@ -42,11 +44,62 @@ function LanguageToggle() {
 }
 
 function CartButton() {
-  const { count, setOpen } = useCart();
+  const { count, ready, setOpen } = useCart();
   const { t } = useLocale();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const prevCount = useRef(0);
+  const hydrated = useRef(false);
+  const [displayCount, setDisplayCount] = useState(0);
+  const [popBadge, setPopBadge] = useState(false);
+
+  useEffect(() => {
+    if (!ready) return;
+
+    if (!hydrated.current) {
+      hydrated.current = true;
+      prevCount.current = count;
+      setDisplayCount(count);
+      return;
+    }
+
+    if (count > prevCount.current) {
+      const from = prevCount.current;
+      const button = buttonRef.current;
+      if (button) {
+        button.classList.remove("cart-bounce");
+        void button.offsetWidth;
+        button.classList.add("cart-bounce");
+      }
+
+      if (from === 0) setPopBadge(true);
+
+      prevCount.current = count;
+      const controls = animate(from, count, {
+        duration: 0.3,
+        ease: "easeOut",
+        onUpdate: (value) => setDisplayCount(Math.round(value)),
+      });
+      const bounceTimer = window.setTimeout(() => {
+        button?.classList.remove("cart-bounce");
+      }, 450);
+
+      return () => {
+        controls.stop();
+        window.clearTimeout(bounceTimer);
+        button?.classList.remove("cart-bounce");
+      };
+    }
+
+    if (count === 0) setPopBadge(false);
+    prevCount.current = count;
+    setDisplayCount(count);
+  }, [count, ready]);
+
+  const badgeValue = displayCount > 9 ? "9+" : displayCount;
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       className="relative flex size-[38px] items-center justify-center rounded-full border border-line text-foreground"
       aria-label={t("cartLabel")}
@@ -55,9 +108,14 @@ function CartButton() {
       <span className="text-[16px] leading-none" aria-hidden>
         🛒
       </span>
-      {count > 0 ? (
-        <span className="absolute -top-1 -end-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-extrabold text-[#111]">
-          {count > 9 ? "9+" : count}
+      {count > 0 || displayCount > 0 ? (
+        <span
+          className={cn(
+            "absolute -top-1 -end-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-extrabold text-[#111]",
+            popBadge && "cart-badge-in",
+          )}
+        >
+          {badgeValue}
         </span>
       ) : null}
     </button>

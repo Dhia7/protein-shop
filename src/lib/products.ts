@@ -190,8 +190,22 @@ export const PRODUCTS: Product[] = [
 
 export const FEATURED_PRODUCTS = PRODUCTS.filter((product) => product.featured);
 
-export function productImageSrc(product: Pick<Product, "image">) {
-  return product.image;
+export function getProduct(id: string) {
+  return PRODUCTS.find((product) => product.id === id);
+}
+
+export function productHref(id: string) {
+  return `/produit/${id}`;
+}
+
+export function relatedProducts(product: Product, limit = 4) {
+  return PRODUCTS.filter(
+    (item) => item.category === product.category && item.id !== product.id,
+  ).slice(0, limit);
+}
+
+export function categoryLabel(id: ProductCategory) {
+  return CATEGORIES.find((category) => category.id === id)?.label ?? id;
 }
 
 export function productOrderHref(product: Product) {

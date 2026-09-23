@@ -1,5 +1,7 @@
-import Image from "next/image";
+import { BlurImage } from "@/components/blur-image";
+import { CountUp } from "@/components/count-up";
 import { ShopButton } from "@/components/shop-button";
+import { HERO_IMAGE } from "@/lib/media";
 import { WRAP } from "@/lib/site";
 
 export function HomeHero() {
@@ -31,24 +33,33 @@ export function HomeHero() {
           </div>
           <div className="mt-12 flex flex-wrap gap-9 border-t border-line pt-7">
             <div>
-              <b className="font-display block text-[30px] font-normal text-foreground">
-                4.8/5
+              <b
+                className="font-display block text-[30px] font-normal text-foreground"
+                aria-label="4.8/5"
+              >
+                <CountUp to={4.8} decimals={1} suffix="/5" />
               </b>
               <span className="text-xs font-semibold tracking-[0.02em] text-chalk-dim">
                 +1200 avis vérifiés
               </span>
             </div>
             <div>
-              <b className="font-display block text-[30px] font-normal text-foreground">
-                24h
+              <b
+                className="font-display block text-[30px] font-normal text-foreground"
+                aria-label="24h"
+              >
+                <CountUp to={24} suffix="h" delay={0.12} />
               </b>
               <span className="text-xs font-semibold tracking-[0.02em] text-chalk-dim">
                 livraison Grand Tunis
               </span>
             </div>
             <div>
-              <b className="font-display block text-[30px] font-normal text-foreground">
-                12
+              <b
+                className="font-display block text-[30px] font-normal text-foreground"
+                aria-label="12"
+              >
+                <CountUp to={12} delay={0.24} />
               </b>
               <span className="text-xs font-semibold tracking-[0.02em] text-chalk-dim">
                 salles partenaires
@@ -58,8 +69,8 @@ export function HomeHero() {
         </div>
 
         <div className="relative aspect-square w-full overflow-hidden bg-iron">
-          <Image
-            src="/hero-athlete.webp"
+          <BlurImage
+            src={HERO_IMAGE}
             alt="Athlète tenant un isolat de whey et des pots de protéines"
             fill
             priority

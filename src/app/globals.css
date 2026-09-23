@@ -129,19 +129,171 @@ html[lang="ar"] .font-display {
 
 @keyframes trust-scroll {
   from {
-    transform: translateX(0);
+    translate: 0;
   }
   to {
-    transform: translateX(-50%);
+    translate: -50% 0;
   }
 }
 
 .trust-marquee {
-  animation: trust-scroll 26s linear infinite;
+  animation: trust-scroll 16s linear infinite;
+  will-change: translate;
+}
+
+.trust-bar:hover .trust-marquee,
+.trust-bar:focus-within .trust-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes add-flash {
+  0% {
+    background-color: var(--color-primary);
+  }
+  40% {
+    background-color: #fff8d6;
+  }
+  100% {
+    background-color: var(--color-primary);
+  }
+}
+
+.add-flash {
+  animation: add-flash 0.28s ease-out;
+}
+
+@keyframes cart-bounce {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  20% {
+    transform: rotate(-12deg) translateY(-2px);
+  }
+  40% {
+    transform: rotate(10deg) translateY(1px);
+  }
+  60% {
+    transform: rotate(-8deg) translateY(-1px);
+  }
+  80% {
+    transform: rotate(4deg) translateY(0);
+  }
+}
+
+.cart-bounce {
+  animation: cart-bounce 0.45s ease;
+}
+
+@keyframes cart-badge-in {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-badge-in {
+  animation: cart-badge-in 0.28s ease-out;
+}
+
+.quick-add {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.group:hover .quick-add,
+.group:focus-within .quick-add {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (hover: none) {
+  .quick-add {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+}
+
+.goal-card::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--color-primary);
+  opacity: 0;
+  transform: scale(0.98);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+.goal-card:hover::after,
+.goal-card:focus-within::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.goal-card:hover .goal-num-digits,
+.goal-card:focus-within .goal-num-digits {
+  transform: scale(1.1);
+}
+
+.goal-card:hover .goal-num-bar,
+.goal-card:focus-within .goal-num-bar {
+  transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .add-flash,
+  .cart-bounce,
+  .cart-badge-in {
+    animation: none;
+  }
+
+  .product-card-image,
+  .group:hover .product-card-image {
+    transition: none !important;
+    scale: 1 !important;
+  }
+
+  .add-to-cart-btn,
+  .quick-add,
+  .goal-card::after,
+  .goal-num-bar,
+  .goal-num-digits {
+    transition: none;
+  }
+
+  .quick-add {
+    transform: none;
+  }
+
+  .sticky-add-bar,
+  .cart-panel {
+    transition: none;
+  }
+
+  .goal-card::after {
+    transform: none;
+  }
+
+  .goal-card:hover .goal-num-digits,
+  .goal-card:focus-within .goal-num-digits {
+    transform: none;
   }
 }

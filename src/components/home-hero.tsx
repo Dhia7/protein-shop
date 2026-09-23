@@ -2,6 +2,7 @@ import { BlurImage } from "@/components/blur-image";
 import { CountUp } from "@/components/count-up";
 import { ShopButton } from "@/components/shop-button";
 import { HERO_IMAGE } from "@/lib/media";
+import { PRODUCTS } from "@/lib/products";
 import { WRAP } from "@/lib/site";
 
 export function HomeHero() {
@@ -35,12 +36,12 @@ export function HomeHero() {
             <div>
               <b
                 className="font-display block text-[30px] font-normal text-foreground"
-                aria-label="4.8/5"
+                aria-label={`${PRODUCTS.length} produits`}
               >
-                <CountUp to={4.8} decimals={1} suffix="/5" />
+                <CountUp to={PRODUCTS.length} />
               </b>
               <span className="text-xs font-semibold tracking-[0.02em] text-chalk-dim">
-                +1200 avis vérifiés
+                produits au catalogue
               </span>
             </div>
             <div>

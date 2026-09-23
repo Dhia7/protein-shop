@@ -10,7 +10,7 @@ const PARTNERS = [
 
 export function PartnersBar() {
   return (
-    <div className="border-y border-line bg-iron-2">
+    <div id="partenaires" className="scroll-mt-[76px] border-y border-line bg-iron-2">
       <div
         className={`${WRAP} flex flex-wrap items-center justify-between gap-5 py-9`}
       >

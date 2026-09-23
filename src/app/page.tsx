@@ -5,7 +5,6 @@ import { HomeCta } from "@/components/home-cta";
 import { HomeHero } from "@/components/home-hero";
 import { PartnersBar } from "@/components/partners-bar";
 import { TrustBar } from "@/components/trust-bar";
-import { UgcSection } from "@/components/ugc-section";
 import { FEATURED_PRODUCTS } from "@/lib/products";
 
 export default function HomePage() {
@@ -16,7 +15,6 @@ export default function HomePage() {
       <GoalFinder />
       <EssentialsGrid products={FEATURED_PRODUCTS} />
       <BundleCta />
-      <UgcSection />
       <PartnersBar />
       <HomeCta />
     </div>

@@ -18,7 +18,7 @@ export function SiteFooter() {
 
   const infoLinks = [
     { href: "/contact", label: t("delivery") },
-    { href: "/#avis", label: t("partners") },
+    { href: "/#partenaires", label: t("partners") },
     { href: "/contact", label: t("navContact") },
   ];
 

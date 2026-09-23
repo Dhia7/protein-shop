@@ -26,7 +26,7 @@ export function QuantityStepper({
   return (
     <div
       className={cn(
-        "flex items-center rounded-full border border-line bg-iron-2",
+        "flex items-center rounded-full border border-line bg-iron",
         compact ? "h-8" : "h-10",
       )}
       role="group"

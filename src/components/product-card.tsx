@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { Check, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BlurImage } from "@/components/blur-image";
 import { useCart } from "@/components/cart-provider";
 import { useLocale } from "@/components/locale-provider";
 import { QuantityStepper } from "@/components/quantity-stepper";
 import { productImage } from "@/lib/media";
-import { productHref, type Product } from "@/lib/products";
+import { categoryLabel, productHref, type Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
-const ADDED_MS = 1000;
+const ADDED_MS = 1100;
 
 export function ProductCard({
   product,
@@ -53,10 +54,10 @@ export function ProductCard({
   }
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-line bg-iron-2">
+    <article className="product-card group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-line bg-iron-2">
       <div className="relative aspect-square overflow-hidden bg-[#ece8df]">
         {product.tag ? (
-          <span className="absolute top-3 start-3 z-[1] rounded-full bg-primary px-2.5 py-1 text-[10px] font-extrabold tracking-[0.03em] text-[#14100D]">
+          <span className="absolute top-3 start-3 z-[2] rounded-full bg-primary px-2.5 py-1 text-[10px] font-extrabold tracking-[0.04em] text-[#14100D] uppercase">
             {product.tag}
           </span>
         ) : null}
@@ -68,58 +69,70 @@ export function ProductCard({
             fill
             priority={priority}
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="product-card-image object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+            className="product-card-image object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07] group-focus-within:scale-[1.07]"
           />
+          <span aria-hidden className="product-card-shine" />
         </Link>
-        <div className="quick-add absolute inset-x-2 bottom-2 z-[2] flex items-center justify-between gap-2 rounded-[2px] bg-[rgba(16,17,20,0.88)] px-2 py-1.5">
-          <span className="text-[10px] font-extrabold tracking-[0.04em] text-primary uppercase">
-            {t("quickAdd")}
+      </div>
+
+      <div className="flex flex-1 flex-col px-4 pt-4 pb-4">
+        <p className="mb-1.5 text-[11px] font-extrabold tracking-[0.08em] text-primary uppercase">
+          {categoryLabel(product.category)}
+        </p>
+        <h4 className="mb-2 text-[17px] leading-snug font-bold">
+          <Link
+            href={href}
+            className="text-foreground no-underline transition-colors duration-200 hover:text-primary"
+          >
+            {product.name}
+          </Link>
+        </h4>
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          <span className="rounded-full border border-line bg-iron px-2 py-0.5 text-[11px] font-semibold text-chalk">
+            {product.size}
           </span>
+          <span className="rounded-full border border-line bg-iron px-2 py-0.5 text-[11px] font-semibold text-chalk">
+            {product.flavour}
+          </span>
+        </div>
+        {product.detail ? (
+          <p className="mb-3 text-xs text-chalk-dim">{product.detail}</p>
+        ) : null}
+
+        <div className="mt-auto flex items-center justify-between gap-3">
+          <p className="font-display text-[28px] leading-none text-primary">
+            {product.price}
+          </p>
           <QuantityStepper
             size="sm"
             value={quantity}
             onChange={setQuantity}
+            max={99}
             label={t("quantity")}
             decreaseLabel={t("decreaseQty")}
             increaseLabel={t("increaseQty")}
           />
         </div>
-      </div>
-      <div className="flex flex-1 flex-col px-[18px] pt-[18px] pb-[22px]">
-        <h4 className="mb-1 text-base font-bold">
-          <Link href={href} className="text-foreground no-underline hover:text-primary">
-            {product.name}
-          </Link>
-        </h4>
-        <p className="mb-3.5 text-xs text-chalk-dim">
-          {product.size} · {product.flavour}
-        </p>
-        <div className="mt-auto flex items-center justify-between gap-2">
-          <div className="font-display text-xl leading-none uppercase">
-            {product.price}
-            {product.detail ? (
-              <small className="mt-1 block font-sans text-[11px] font-semibold normal-case text-chalk-dim">
-                {product.detail}
-              </small>
-            ) : null}
-          </div>
-          <button
-            ref={buttonRef}
-            type="button"
-            aria-label={`${t("addToCart")} ${product.name}`}
-            className={cn(
-              "add-to-cart-btn flex h-[34px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary font-extrabold whitespace-nowrap text-[#14100D] transition-[width,max-width,padding,font-size] duration-300",
-              justAdded
-                ? "w-auto max-w-[11rem] px-3 text-[11px]"
-                : "w-[34px] max-w-[34px] text-lg",
-            )}
-            onClick={handleAdd}
-          >
-            <span aria-live="polite" aria-atomic="true">
-              {justAdded ? t("addedToCart") : "+"}
-            </span>
-          </button>
-        </div>
+
+        <button
+          ref={buttonRef}
+          type="button"
+          aria-label={`${t("addToCart")} ${product.name}`}
+          className={cn(
+            "add-to-cart-btn product-add-btn mt-3 inline-flex h-11 w-full items-center justify-center gap-2 text-[13px] font-extrabold tracking-[0.14em] uppercase",
+            justAdded && "pointer-events-none product-add-btn-added",
+          )}
+          onClick={handleAdd}
+        >
+          {justAdded ? (
+            <Check className="size-4" strokeWidth={2.5} aria-hidden />
+          ) : (
+            <Plus className="size-4" strokeWidth={2.5} aria-hidden />
+          )}
+          <span aria-live="polite" aria-atomic="true">
+            {justAdded ? t("addedToCartShort") : t("addToCartShort")}
+          </span>
+        </button>
       </div>
     </article>
   );

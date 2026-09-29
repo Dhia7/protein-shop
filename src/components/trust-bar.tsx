@@ -1,34 +1,48 @@
-const ITEMS = [
-  "TESTÉ EN LABORATOIRE",
-  "SANS SUCRE AJOUTÉ",
-  "LIVRAISON 24H GRAND TUNIS",
-  "PAIEMENT À LA LIVRAISON",
-  "RECOMMANDÉ PAR 12 SALLES",
+"use client";
+
+import { Award, HeartPulse, Percent, Truck } from "lucide-react";
+import { RevealItem, RevealStagger } from "@/components/reveal";
+import { useLocale } from "@/components/locale-provider";
+import { WRAP } from "@/lib/site";
+import type { TranslationKey } from "@/lib/i18n";
+
+const ITEMS: {
+  icon: typeof Truck;
+  title: TranslationKey;
+  hint: TranslationKey;
+}[] = [
+  { icon: Truck, title: "trustDelivery", hint: "trustDeliveryHint" },
+  { icon: Award, title: "trustAuth", hint: "trustAuthHint" },
+  { icon: Percent, title: "trustPrice", hint: "trustPriceHint" },
+  { icon: HeartPulse, title: "trustCoach", hint: "trustCoachHint" },
 ];
 
-function TrustTrack({ "aria-hidden": ariaHidden }: { "aria-hidden"?: boolean }) {
-  return (
-    <div
-      aria-hidden={ariaHidden}
-      className="flex shrink-0 items-center gap-[60px] pr-[60px]"
-    >
-      {ITEMS.map((item) => (
-        <span key={item} className="inline-flex items-center gap-2.5">
-          ✓ {item}
-        </span>
-      ))}
-    </div>
-  );
-}
-
 export function TrustBar() {
+  const { t } = useLocale();
+
   return (
-    <div className="trust-bar overflow-hidden border-b border-line bg-primary text-[#14100D]">
-      <div className="trust-marquee flex w-max py-3.5 text-sm font-extrabold tracking-[0.03em]">
-        <TrustTrack />
-        <TrustTrack aria-hidden />
-      </div>
-      <p className="sr-only">{ITEMS.join(" · ")}</p>
-    </div>
+    <section className="border-y border-primary/20 bg-black text-white">
+      <RevealStagger
+        className={`${WRAP} grid grid-cols-2 gap-8 py-10 lg:grid-cols-4`}
+      >
+        {ITEMS.map((item) => {
+          const Icon = item.icon;
+          return (
+            <RevealItem
+              key={item.title}
+              className="flex flex-col items-center gap-3 md:items-start"
+            >
+              <Icon className="size-8 text-primary" aria-hidden />
+              <h4 className="text-xs font-black tracking-widest uppercase">
+                {t(item.title)}
+              </h4>
+              <p className="text-[10px] font-bold text-zinc-500 uppercase">
+                {t(item.hint)}
+              </p>
+            </RevealItem>
+          );
+        })}
+      </RevealStagger>
+    </section>
   );
 }

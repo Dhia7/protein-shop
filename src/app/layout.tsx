@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Noto_Sans_Arabic, Work_Sans } from "next/font/google";
+import { Archivo, Bebas_Neue, Noto_Sans_Arabic } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteProviders } from "@/components/site-providers";
@@ -7,15 +7,16 @@ import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
-const anton = Anton({
-  weight: "400",
+const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-anton",
+  variable: "--font-archivo",
+  weight: ["400", "600", "700", "900"],
 });
 
-const workSans = Work_Sans({
+const bebas = Bebas_Neue({
+  weight: "400",
   subsets: ["latin", "latin-ext"],
-  variable: "--font-work-sans",
+  variable: "--font-bebas",
 });
 
 const notoArabic = Noto_Sans_Arabic({
@@ -44,7 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`dark ${anton.variable} ${workSans.variable} ${notoArabic.variable} h-full antialiased`}
+      className={`${archivo.variable} ${bebas.variable} ${notoArabic.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">

@@ -15,7 +15,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       title="Commander via WhatsApp"
       aria-label="Commander via WhatsApp"
-      className="fixed right-[26px] bottom-[26px] z-[60] flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(245,196,0,0.4)] no-underline"
+      className="fixed end-[26px] bottom-[26px] z-[60] flex size-14 items-center justify-center bg-primary text-black shadow-[6px_6px_0_#000] no-underline"
     >
       <MessageCircle className="size-6" aria-hidden />
     </a>

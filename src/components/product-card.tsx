@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Plus } from "lucide-react";
+import { Check, ShoppingCart } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BlurImage } from "@/components/blur-image";
 import { useCart } from "@/components/cart-provider";
@@ -16,9 +16,13 @@ const ADDED_MS = 1100;
 export function ProductCard({
   product,
   priority = false,
+  compact = false,
+  catalog = false,
 }: {
   product: Product;
   priority?: boolean;
+  compact?: boolean;
+  catalog?: boolean;
 }) {
   const { addItem } = useCart();
   const { t } = useLocale();
@@ -54,85 +58,86 @@ export function ProductCard({
   }
 
   return (
-    <article className="product-card group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-line bg-iron-2">
-      <div className="relative aspect-square overflow-hidden bg-[#ece8df]">
-        {product.tag ? (
-          <span className="absolute top-3 start-3 z-[2] rounded-full bg-primary px-2.5 py-1 text-[10px] font-extrabold tracking-[0.04em] text-[#14100D] uppercase">
-            {product.tag}
-          </span>
-        ) : null}
-        <Link href={href} className="absolute inset-0 block" tabIndex={-1}>
-          <span className="sr-only">{product.name}</span>
-          <BlurImage
-            src={productImage(product)}
-            alt={product.alt}
-            fill
-            priority={priority}
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="product-card-image object-cover transition-transform duration-500 ease-out group-hover:scale-[1.07] group-focus-within:scale-[1.07]"
-          />
-          <span aria-hidden className="product-card-shine" />
-        </Link>
-      </div>
+    <article className="product-card group relative flex h-full flex-col overflow-hidden border border-zinc-100 bg-white">
+      <Link href={href} className="block no-underline">
+        <div className="relative aspect-square overflow-hidden bg-zinc-100">
+          {product.tag ? (
+            <span className="absolute top-3 start-3 z-[2] bg-black px-2 py-1 text-[8px] font-black text-primary uppercase italic">
+              {product.tag}
+            </span>
+          ) : null}
+          <div className="absolute -inset-[12%]">
+            <BlurImage
+              src={productImage(product)}
+              alt={product.alt}
+              fill
+              priority={priority}
+              sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+              className="product-card-image object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-focus-within:scale-105"
+            />
+          </div>
+        </div>
+      </Link>
 
-      <div className="flex flex-1 flex-col px-4 pt-4 pb-4">
-        <p className="mb-1.5 text-[11px] font-extrabold tracking-[0.08em] text-primary uppercase">
-          {categoryLabel(product.category)}
-        </p>
-        <h4 className="mb-2 text-[17px] leading-snug font-bold">
+      <div className="flex flex-1 flex-col space-y-1.5 p-4">
+        <div className="flex items-start justify-between gap-2">
+          <span className="text-[9px] font-black tracking-widest text-zinc-400 uppercase">
+            {catalog ? t("brandOurs") : categoryLabel(product.category)}
+          </span>
+        </div>
+        <h3 className="text-base leading-tight font-bold uppercase">
           <Link
             href={href}
-            className="text-foreground no-underline transition-colors duration-200 hover:text-primary"
+            className="text-foreground no-underline transition-colors group-hover:text-primary"
           >
             {product.name}
           </Link>
-        </h4>
-        <div className="mb-3 flex flex-wrap gap-1.5">
-          <span className="rounded-full border border-line bg-iron px-2 py-0.5 text-[11px] font-semibold text-chalk">
-            {product.size}
-          </span>
-          <span className="rounded-full border border-line bg-iron px-2 py-0.5 text-[11px] font-semibold text-chalk">
-            {product.flavour}
-          </span>
-        </div>
-        {product.detail ? (
-          <p className="mb-3 text-xs text-chalk-dim">{product.detail}</p>
+        </h3>
+        {!compact && !catalog && product.detail ? (
+          <p className="text-xs text-zinc-500">{product.detail}</p>
         ) : null}
 
-        <div className="mt-auto flex items-center justify-between gap-3">
-          <p className="font-display text-[28px] leading-none text-primary">
-            {product.price}
-          </p>
-          <QuantityStepper
-            size="sm"
-            value={quantity}
-            onChange={setQuantity}
-            max={99}
-            label={t("quantity")}
-            decreaseLabel={t("decreaseQty")}
-            increaseLabel={t("increaseQty")}
-          />
+        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+          <p className="font-display text-3xl leading-none">{product.price}</p>
+          <div className="flex items-center gap-2">
+            {catalog ? null : (
+              <div
+                className={cn(
+                  "transition-opacity duration-200",
+                  compact
+                    ? "max-md:opacity-100 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+                    : "",
+                )}
+              >
+                <QuantityStepper
+                  size="sm"
+                  value={quantity}
+                  onChange={setQuantity}
+                  max={99}
+                  label={t("quantity")}
+                  decreaseLabel={t("decreaseQty")}
+                  increaseLabel={t("increaseQty")}
+                />
+              </div>
+            )}
+            <button
+              ref={buttonRef}
+              type="button"
+              aria-label={`${t("addToCart")} ${product.name}`}
+              className={cn(
+                "flex size-10 items-center justify-center bg-primary text-black shadow-sm transition-colors hover:bg-black hover:text-primary",
+                justAdded && "pointer-events-none bg-black text-primary",
+              )}
+              onClick={handleAdd}
+            >
+              {justAdded ? (
+                <Check className="size-4" strokeWidth={2.5} aria-hidden />
+              ) : (
+                <ShoppingCart className="size-4" aria-hidden />
+              )}
+            </button>
+          </div>
         </div>
-
-        <button
-          ref={buttonRef}
-          type="button"
-          aria-label={`${t("addToCart")} ${product.name}`}
-          className={cn(
-            "add-to-cart-btn product-add-btn mt-3 inline-flex h-11 w-full items-center justify-center gap-2 text-[13px] font-extrabold tracking-[0.14em] uppercase",
-            justAdded && "pointer-events-none product-add-btn-added",
-          )}
-          onClick={handleAdd}
-        >
-          {justAdded ? (
-            <Check className="size-4" strokeWidth={2.5} aria-hidden />
-          ) : (
-            <Plus className="size-4" strokeWidth={2.5} aria-hidden />
-          )}
-          <span aria-live="polite" aria-atomic="true">
-            {justAdded ? t("addedToCartShort") : t("addToCartShort")}
-          </span>
-        </button>
       </div>
     </article>
   );

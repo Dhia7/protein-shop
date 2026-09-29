@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,17 +21,16 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <div className="rounded-xl border border-border bg-card p-4">
-        <p className="font-medium text-primary">Message envoyé</p>
-        <p className="mt-2 text-sm text-muted-foreground">
+      <div className="border border-line bg-zinc-50 p-6">
+        <p className="font-black tracking-wide uppercase">Message envoyé</p>
+        <p className="mt-2 text-sm text-zinc-500">
           Merci {name.trim()}. Nous revenons vers{" "}
           {email.trim().length > 0 ? email.trim() : "vous"} à propos de :{" "}
           {message.trim()}.
         </p>
-        <Button
+        <button
           type="button"
-          variant="ghost"
-          className="mt-4"
+          className="btn-ghost mt-6"
           onClick={() => {
             setSent(false);
             setName("");
@@ -41,7 +39,7 @@ export function ContactForm() {
           }}
         >
           Nouveau message
-        </Button>
+        </button>
       </div>
     );
   }
@@ -57,6 +55,7 @@ export function ContactForm() {
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder="Votre nom"
+            className="h-11 rounded-none"
             required
           />
         </div>
@@ -69,6 +68,7 @@ export function ContactForm() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="vous@email.com"
+            className="h-11 rounded-none"
           />
         </div>
       </div>
@@ -80,13 +80,16 @@ export function ContactForm() {
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           placeholder="Produit, quantité, ville de livraison…"
+          className="rounded-none"
           required
           rows={4}
         />
       </div>
-      <div className="flex items-center gap-3">
-        <Button type="submit">Envoyer</Button>
-        <p className="text-xs text-muted-foreground">Nom et message requis.</p>
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="submit" className="btn-primary">
+          Envoyer
+        </button>
+        <p className="text-xs text-zinc-500">Nom et message requis.</p>
       </div>
     </form>
   );

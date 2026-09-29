@@ -1,22 +1,32 @@
+"use client";
+
 import { ShopButton } from "@/components/shop-button";
+import { Reveal } from "@/components/reveal";
+import { useLocale } from "@/components/locale-provider";
 import { WRAP } from "@/lib/site";
 
 export function BundleCta() {
+  const { t } = useLocale();
+
   return (
-    <section id="packs" className="scroll-mt-[76px] py-16 md:py-24">
+    <section id="packs" className="scroll-mt-[76px] bg-white py-16 md:py-24">
       <div className={WRAP}>
-        <div className="grid items-center gap-6 rounded border border-line bg-iron-2 px-8 py-11 md:grid-cols-[1fr_auto] md:px-12">
+        <Reveal>
+        <div className="relative overflow-hidden bg-black px-8 py-12 text-white md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-8 md:px-14 md:py-16">
+          <div className="diagonal-stripe pointer-events-none absolute -top-10 -right-16 h-40 w-56 opacity-80" />
           <div>
-            <h3 className="font-display mb-2.5 text-[30px] uppercase">
-              Compose ton stack
+            <h3 className="font-display mb-3 text-[clamp(32px,4vw,52px)]">
+              {t("bundleTitle")}
             </h3>
-            <p className="max-w-[48ch] text-[15px] text-chalk-dim">
-              Whey + créatine + pré-workout, au prix le plus bas que si acheté
-              séparément. Choisis tes 3 produits, on calcule la remise.
+            <p className="max-w-[52ch] text-[15px] leading-relaxed text-zinc-400">
+              {t("bundleBody")}
             </p>
           </div>
-          <ShopButton href="/catalogue">Créer mon pack →</ShopButton>
+          <ShopButton href="/catalogue" className="relative z-[1] mt-8 md:mt-0">
+            {t("bundleCta")}
+          </ShopButton>
         </div>
+        </Reveal>
       </div>
     </section>
   );

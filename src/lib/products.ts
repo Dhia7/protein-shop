@@ -190,8 +190,21 @@ export const PRODUCTS: Product[] = [
 
 export const FEATURED_PRODUCTS = PRODUCTS.filter((product) => product.featured);
 
+export const HOME_ARRIVALS = FEATURED_PRODUCTS.slice(0, 4);
+
+export function categoryCount(id: CategoryId) {
+  if (id === "all") return PRODUCTS.length;
+  return PRODUCTS.filter((product) => product.category === id).length;
+}
+
+export const HERO_PRODUCT_ID = "whey-isolate-2kg";
+
 export function getProduct(id: string) {
   return PRODUCTS.find((product) => product.id === id);
+}
+
+export function getHeroProduct() {
+  return getProduct(HERO_PRODUCT_ID) ?? PRODUCTS[0];
 }
 
 export function productHref(id: string) {

@@ -1,28 +1,26 @@
-import { WRAP } from "@/lib/site";
+"use client";
 
-const PARTNERS = [
-  "IRON CLUB",
-  "POWERHOUSE",
-  "FLEX GYM",
-  "TITAN FITNESS",
-  "APEX",
-];
+import { Reveal } from "@/components/reveal";
+import { useLocale } from "@/components/locale-provider";
+import { PARTNER_NAMES, WRAP } from "@/lib/site";
 
 export function PartnersBar() {
+  const { t } = useLocale();
+
   return (
-    <div id="partenaires" className="scroll-mt-[76px] border-y border-line bg-iron-2">
-      <div
+    <div id="partenaires" className="scroll-mt-[76px] border-y border-line bg-white">
+      <Reveal
         className={`${WRAP} flex flex-wrap items-center justify-between gap-5 py-9`}
       >
-        <span className="text-xs font-extrabold tracking-[0.04em] text-chalk-dim">
-          RECOMMANDÉ PAR
+        <span className="text-[11px] font-black tracking-[0.22em] text-zinc-400 uppercase">
+          {t("recommendedBy")}
         </span>
-        <div className="font-display flex flex-wrap gap-10 text-xl tracking-[0.02em] opacity-50">
-          {PARTNERS.map((name) => (
+        <div className="font-display flex flex-wrap gap-10 text-2xl tracking-[0.04em] text-black/40">
+          {PARTNER_NAMES.map((name) => (
             <span key={name}>{name}</span>
           ))}
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

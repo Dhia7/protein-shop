@@ -30,6 +30,7 @@ type CartContextValue = {
   addItem: (product: Product, quantity?: number) => void;
   setItemQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
   checkoutHref: string;
 };
 
@@ -135,6 +136,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((current) => current.filter((item) => item.id !== id));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setItems([]);
+  }, []);
+
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = items.reduce(
     (sum, item) => sum + priceAmount(item.price) * item.quantity,
@@ -164,6 +169,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addItem,
       setItemQuantity,
       removeItem,
+      clearCart,
       checkoutHref,
     }),
     [
@@ -175,6 +181,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addItem,
       setItemQuantity,
       removeItem,
+      clearCart,
       checkoutHref,
     ],
   );

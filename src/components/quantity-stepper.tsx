@@ -11,6 +11,7 @@ export function QuantityStepper({
   decreaseLabel,
   increaseLabel,
   size = "md",
+  boxed = false,
 }: {
   value: number;
   onChange: (value: number) => void;
@@ -19,15 +20,21 @@ export function QuantityStepper({
   label: string;
   decreaseLabel: string;
   increaseLabel: string;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
+  boxed?: boolean;
 }) {
   const compact = size === "sm";
+  const large = size === "lg";
 
   return (
     <div
       className={cn(
-        "flex items-center rounded-full border border-line bg-iron",
-        compact ? "h-8" : "h-10",
+        "flex items-center bg-white",
+        large
+          ? "qty-box"
+          : boxed
+            ? "h-10 border-2 border-black"
+            : cn("border border-line", compact ? "h-8" : "h-10"),
       )}
       role="group"
       aria-label={label}
@@ -35,8 +42,14 @@ export function QuantityStepper({
       <button
         type="button"
         className={cn(
-          "flex items-center justify-center text-sm font-bold text-chalk-dim hover:text-foreground",
-          compact ? "size-8" : "size-10",
+          "flex items-center justify-center font-bold text-zinc-500 hover:bg-zinc-100 hover:text-foreground disabled:opacity-30",
+          large
+            ? "h-full w-12 text-base"
+            : boxed
+              ? "size-10 border-e-2 border-black"
+              : compact
+                ? "size-8 text-sm"
+                : "size-10 text-sm",
         )}
         aria-label={decreaseLabel}
         disabled={value <= min}
@@ -46,8 +59,9 @@ export function QuantityStepper({
       </button>
       <span
         className={cn(
-          "min-w-[1.25rem] text-center font-extrabold tabular-nums",
-          compact ? "text-xs" : "text-sm",
+          "text-center font-extrabold tabular-nums",
+          large ? "w-12 text-base" : boxed ? "w-12 text-lg" : "min-w-[1.25rem]",
+          !large && !boxed && (compact ? "text-xs" : "text-sm"),
         )}
       >
         {value}
@@ -55,8 +69,14 @@ export function QuantityStepper({
       <button
         type="button"
         className={cn(
-          "flex items-center justify-center text-sm font-bold text-chalk-dim hover:text-foreground",
-          compact ? "size-8" : "size-10",
+          "flex items-center justify-center font-bold text-zinc-500 hover:bg-zinc-100 hover:text-foreground disabled:opacity-30",
+          large
+            ? "h-full w-12 text-base"
+            : boxed
+              ? "size-10 border-s-2 border-black"
+              : compact
+                ? "size-8 text-sm"
+                : "size-10 text-sm",
         )}
         aria-label={increaseLabel}
         disabled={value >= max}

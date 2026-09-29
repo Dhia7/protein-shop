@@ -3,7 +3,7 @@ import { CatalogueBrowser } from "@/components/catalogue-browser";
 import { isCategoryId } from "@/lib/products";
 
 export const metadata: Metadata = {
-  title: "Catalogue",
+  title: "Catalogue Produits",
   description:
     "Parcourez le catalogue Protein Shop : whey, mass gainer, BCAA, créatine et accessoires. Filtrez par catégorie et commandez sur WhatsApp.",
 };
@@ -19,18 +19,6 @@ export default async function CataloguePage({
     : "all";
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-6 md:py-12">
-      <div className="flex flex-col gap-2">
-        <h1 className="font-display text-[clamp(32px,4vw,48px)]">Catalogue</h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Tous les produits de démonstration. Filtrez par catégorie, recherchez
-          un nom, puis commandez via WhatsApp — paiement à la livraison.
-        </p>
-      </div>
-      <CatalogueBrowser
-        key={initialCategory}
-        initialCategory={initialCategory}
-      />
-    </div>
+    <CatalogueBrowser initialCategory={initialCategory} />
   );
 }

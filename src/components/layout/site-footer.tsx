@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Clock, MapPin, Phone } from "lucide-react";
 import { SiteLogo } from "@/components/site-logo";
 import { useLocale } from "@/components/locale-provider";
 import { WHATSAPP_HREF } from "@/lib/products";
@@ -9,85 +10,92 @@ import { WRAP } from "@/lib/site";
 export function SiteFooter() {
   const { t } = useLocale();
 
-  const shopLinks = [
-    { href: "/catalogue?categorie=whey", label: t("whey") },
-    { href: "/catalogue?categorie=creatine", label: t("creatine") },
+  const categoryLinks = [
+    { href: "/catalogue?categorie=whey", label: t("catWhey") },
+    { href: "/catalogue?categorie=mass", label: t("catGainers") },
     { href: "/catalogue?categorie=preworkout", label: t("preworkout") },
-    { href: "/#packs", label: t("packs") },
+    { href: "/catalogue?categorie=accessoires", label: t("catAccess") },
   ];
 
   const infoLinks = [
-    { href: "/contact", label: t("delivery") },
-    { href: "/#partenaires", label: t("partners") },
+    { href: "/contact", label: t("footerAbout") },
+    { href: "/contact", label: t("footerShipping") },
     { href: "/contact", label: t("navContact") },
   ];
 
   return (
-    <footer className="pt-16 pb-10">
-      <div className={WRAP}>
-        <div className="mb-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
-          <div>
-            <SiteLogo className="mb-3.5 inline-block" />
-            <p className="max-w-[32ch] text-sm text-chalk-dim">{t("footerBlurb")}</p>
-          </div>
-          <div>
-            <h5 className="mb-[18px] text-[13px] font-extrabold tracking-[0.04em] text-chalk-dim uppercase">
-              {t("shop")}
-            </h5>
-            <ul className="list-none">
-              {shopLinks.map((item) => (
-                <li key={item.href + item.label} className="mb-[11px] text-sm">
-                  <Link
-                    href={item.href}
-                    className="text-foreground no-underline opacity-85 hover:opacity-100"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h5 className="mb-[18px] text-[13px] font-extrabold tracking-[0.04em] text-chalk-dim uppercase">
-              {t("info")}
-            </h5>
-            <ul className="list-none">
-              {infoLinks.map((item) => (
-                <li key={item.href + item.label} className="mb-[11px] text-sm">
-                  <Link
-                    href={item.href}
-                    className="text-foreground no-underline opacity-85 hover:opacity-100"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h5 className="mb-[18px] text-[13px] font-extrabold tracking-[0.04em] text-chalk-dim uppercase">
-              {t("follow")}
-            </h5>
-            <ul className="list-none">
-              <li className="mb-[11px] text-sm">
-                <a
-                  href={WHATSAPP_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground no-underline opacity-85 hover:opacity-100"
+    <footer className="border-t border-primary/20 bg-black text-white">
+      <div className={`${WRAP} mb-12 grid grid-cols-1 gap-12 py-20 md:grid-cols-4`}>
+        <div className="space-y-6">
+          <SiteLogo inverse />
+          <p className="text-sm leading-relaxed text-zinc-500">{t("footerBlurb")}</p>
+        </div>
+        <div>
+          <h4 className="mb-8 text-xs font-bold tracking-widest uppercase">
+            {t("footerCategories")}
+          </h4>
+          <ul className="space-y-4 text-sm font-medium text-zinc-400">
+            {categoryLinks.map((item) => (
+              <li key={item.href + item.label}>
+                <Link
+                  href={item.href}
+                  className="text-zinc-400 no-underline transition-colors hover:text-primary"
                 >
-                  WhatsApp
-                </a>
+                  {item.label}
+                </Link>
               </li>
-              <li className="mb-[11px] text-sm opacity-85">Instagram</li>
-              <li className="mb-[11px] text-sm opacity-85">TikTok</li>
-            </ul>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="mb-8 text-xs font-bold tracking-widest uppercase">
+            {t("footerInfo")}
+          </h4>
+          <ul className="space-y-4 text-sm font-medium text-zinc-400">
+            {infoLinks.map((item) => (
+              <li key={item.href + item.label}>
+                <Link
+                  href={item.href}
+                  className="text-zinc-400 no-underline transition-colors hover:text-primary"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="mb-8 text-xs font-bold tracking-widest uppercase">
+            {t("storeTitle")}
+          </h4>
+          <div className="space-y-4 text-sm text-zinc-400">
+            <div className="flex gap-3">
+              <MapPin className="size-4 shrink-0 text-primary" aria-hidden />
+              <span>{t("storeAddress")}</span>
+            </div>
+            <div className="flex gap-3">
+              <Clock className="size-4 shrink-0 text-primary" aria-hidden />
+              <span>{t("storeHours")}</span>
+            </div>
+            <div className="flex gap-3">
+              <Phone className="size-4 shrink-0 text-primary" aria-hidden />
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 no-underline hover:text-primary"
+              >
+                {t("whatsappDisplay")}
+              </a>
+            </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 text-xs text-chalk-dim">
-          <span>{t("copyright")}</span>
-          <span>{t("cod")}</span>
-        </div>
+      </div>
+      <div
+        className={`${WRAP} flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-10 pb-10 md:flex-row`}
+      >
+        <p className="text-xs text-zinc-600">{t("copyright")}</p>
+        <p className="text-xs text-zinc-600">{t("cod")}</p>
       </div>
     </footer>
   );

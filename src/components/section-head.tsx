@@ -2,12 +2,16 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function SectionHead({
+  eyebrow,
   title,
   description,
+  action,
   className,
 }: {
+  eyebrow?: string;
   title: ReactNode;
-  description: string;
+  description?: string;
+  action?: ReactNode;
   className?: string;
 }) {
   return (
@@ -17,10 +21,24 @@ export function SectionHead({
         className,
       )}
     >
-      <h2 className="font-display max-w-[14ch] text-[clamp(32px,4vw,48px)]">
-        {title}
-      </h2>
-      <p className="max-w-[34ch] text-[15px] text-chalk-dim">{description}</p>
+      <div>
+        {eyebrow ? (
+          <p className="mb-3 text-[11px] font-black tracking-[0.28em] text-primary uppercase">
+            {eyebrow}
+          </p>
+        ) : null}
+        <h2 className="font-display max-w-[16ch] text-[clamp(36px,5vw,64px)]">
+          {title}
+        </h2>
+      </div>
+      <div className="flex max-w-[36ch] flex-col items-start gap-4 sm:items-end">
+        {description ? (
+          <p className="text-[15px] leading-relaxed text-zinc-500">
+            {description}
+          </p>
+        ) : null}
+        {action}
+      </div>
     </div>
   );
 }

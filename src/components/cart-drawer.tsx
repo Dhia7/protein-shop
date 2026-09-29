@@ -25,7 +25,6 @@ export function CartDrawer() {
     setOpen,
     setItemQuantity,
     removeItem,
-    checkoutHref,
   } = useCart();
   const { t } = useLocale();
   const pathname = usePathname();
@@ -64,7 +63,7 @@ export function CartDrawer() {
         type="button"
         tabIndex={open ? 0 : -1}
         className={cn(
-          "absolute inset-0 bg-black/55 transition-opacity duration-300",
+          "absolute inset-0 bg-black/50 transition-opacity duration-300",
           open ? "opacity-100" : "opacity-0",
         )}
         aria-label={t("cartClose")}
@@ -75,14 +74,14 @@ export function CartDrawer() {
         aria-modal="true"
         aria-labelledby="cart-title"
         className={cn(
-          "cart-panel absolute inset-y-0 end-0 flex w-[min(26rem,100vw)] flex-col border-s border-line bg-iron-2 transition-transform duration-300",
+          "cart-panel absolute inset-y-0 end-0 flex w-[min(26rem,100vw)] flex-col border-s border-line bg-white transition-transform duration-300",
           open ? "translate-x-0" : "translate-x-full rtl:-translate-x-full",
         )}
       >
         <div className="flex items-center justify-between border-b border-line px-5 py-4">
           <h2
             id="cart-title"
-            className="text-sm font-extrabold tracking-[0.04em] uppercase"
+            className="text-sm font-extrabold tracking-[0.08em] uppercase"
           >
             {t("cartTitle")}
             {count > 0 ? ` (${count})` : ""}
@@ -90,7 +89,7 @@ export function CartDrawer() {
           <button
             ref={closeRef}
             type="button"
-            className="flex size-9 items-center justify-center rounded-full border border-line text-chalk-dim hover:text-foreground"
+            className="flex size-9 items-center justify-center border border-line text-zinc-500 hover:text-foreground"
             aria-label={t("cartClose")}
             onClick={closeCart}
           >
@@ -102,7 +101,7 @@ export function CartDrawer() {
           {items.length === 0 ? (
             <div className="flex flex-1 flex-col justify-center py-10 text-center">
               <p className="text-sm font-bold">{t("cartEmpty")}</p>
-              <p className="mt-2 text-sm leading-relaxed text-chalk-dim">
+              <p className="mt-2 text-sm leading-relaxed text-zinc-500">
                 {t("cartEmptyHint")}
               </p>
             </div>
@@ -117,7 +116,7 @@ export function CartDrawer() {
                 <div key={item.id} className="flex gap-3">
                   <Link
                     href={href}
-                    className="relative size-[4.5rem] shrink-0 overflow-hidden rounded-[2px] bg-[#ece8df]"
+                    className="relative size-[4.5rem] shrink-0 overflow-hidden border border-line bg-zinc-50"
                   >
                     {image ? (
                       <BlurImage
@@ -125,7 +124,7 @@ export function CartDrawer() {
                         alt={product?.alt ?? item.name}
                         fill
                         sizes="72px"
-                        className="pointer-events-none object-cover object-center"
+                        className="pointer-events-none object-contain p-1"
                       />
                     ) : null}
                     <span className="sr-only">{item.name}</span>
@@ -142,9 +141,11 @@ export function CartDrawer() {
                         {formatPrice(lineTotal)}
                       </p>
                     </div>
-                    <p className="mt-0.5 text-xs text-chalk-dim">
+                    <p className="mt-0.5 text-xs text-zinc-500">
                       {item.size} · {item.flavour}
-                      {item.quantity > 1 ? ` · ${item.price} × ${item.quantity}` : ""}
+                      {item.quantity > 1
+                        ? ` · ${item.price} × ${item.quantity}`
+                        : ""}
                     </p>
                     <div className="mt-2.5 flex items-center justify-between gap-2">
                       <QuantityStepper
@@ -160,7 +161,7 @@ export function CartDrawer() {
                       />
                       <button
                         type="button"
-                        className="text-xs font-bold text-chalk-dim hover:text-primary"
+                        className="text-xs font-bold text-zinc-500 hover:text-primary"
                         onClick={() => removeItem(item.id)}
                       >
                         {t("cartRemove")}
@@ -177,35 +178,41 @@ export function CartDrawer() {
           {items.length === 0 ? (
             <Link
               href="/catalogue"
-              className="inline-flex items-center justify-center rounded-[2px] bg-primary px-5 py-3 text-sm font-bold text-primary-foreground no-underline"
+              className="inline-flex w-full items-center justify-center bg-primary px-5 py-3.5 text-sm font-extrabold tracking-[0.14em] text-black uppercase no-underline"
             >
               {t("cartShop")}
             </Link>
           ) : (
             <>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-extrabold tracking-[0.04em] text-chalk-dim uppercase">
+                <span className="text-sm font-extrabold tracking-[0.08em] text-zinc-500 uppercase">
                   {t("cartTotal")}
                 </span>
                 <span className="font-display text-2xl">
                   {formatPrice(subtotal)}
                 </span>
               </div>
-              <p className="text-xs leading-relaxed text-chalk-dim">
+              <p className="text-xs leading-relaxed text-zinc-500">
                 {t("cartDelivery")}
               </p>
-              <a
-                href={checkoutHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-[2px] bg-primary px-5 py-3 text-sm font-bold text-primary-foreground no-underline"
+              <Link
+                href="/commande"
+                className="inline-flex w-full items-center justify-center bg-primary px-5 py-3.5 text-sm font-extrabold tracking-[0.14em] text-black uppercase no-underline"
                 onClick={closeCart}
               >
-                {t("cartCheckout")}
-              </a>
+                {t("cartPay")}
+              </Link>
+              <Link
+                href="/panier"
+                className="inline-flex w-full items-center justify-center border border-line px-5 py-3 text-sm font-extrabold tracking-[0.14em] uppercase no-underline hover:border-black"
+                onClick={closeCart}
+              >
+                {t("cartView")}
+              </Link>
               <Link
                 href="/catalogue"
-                className="inline-flex items-center justify-center rounded-[2px] border-[1.5px] border-steel px-5 py-2.5 text-sm font-bold text-foreground no-underline hover:border-primary"
+                className="btn-ghost w-full no-underline"
+                onClick={closeCart}
               >
                 {t("cartContinue")}
               </Link>

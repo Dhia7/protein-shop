@@ -65,17 +65,20 @@ export function GoalFinder() {
         <RevealStagger className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {GOALS.map((goal) => (
             <RevealItem key={goal.num}>
-            <article
-              className="goal-card group relative z-0 flex min-h-[420px] flex-col overflow-hidden border border-line bg-white md:min-h-[480px]"
+            <Link
+              href={goal.href}
+              className="goal-card group relative z-0 flex min-h-[420px] flex-col overflow-hidden border border-line bg-white no-underline md:min-h-[480px]"
             >
               <div className="relative min-h-[240px] flex-1 overflow-hidden bg-zinc-100">
-                <BlurImage
-                  src={goal.image}
-                  alt={goal.alt}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="goal-card-image object-cover object-center transition-transform duration-500 group-hover:scale-[1.06]"
-                />
+                <div className="goal-card-visual absolute inset-0">
+                  <BlurImage
+                    src={goal.image}
+                    alt={goal.alt}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover object-center"
+                  />
+                </div>
               </div>
               <div className="relative z-[1] border-t-4 border-primary bg-white px-6 py-6">
                 <span className="font-display mb-3 block text-sm text-primary">
@@ -87,20 +90,17 @@ export function GoalFinder() {
                     className="goal-num-bar mt-1.5 block h-1 w-[1.6em] origin-start scale-x-0 bg-primary transition-transform duration-300 ease-out"
                   />
                 </span>
-                <h3 className="font-display mb-2 text-[28px]">
+                <h3 className="font-display mb-2 text-[28px] text-black">
                   {t(goal.titleKey)}
                 </h3>
                 <p className="mb-4 text-sm leading-relaxed text-zinc-500">
                   {t(goal.bodyKey)}
                 </p>
-                <Link
-                  href={goal.href}
-                  className="text-[13px] font-extrabold tracking-[0.08em] text-black uppercase no-underline hover:text-primary"
-                >
+                <span className="text-[13px] font-extrabold tracking-[0.08em] text-black uppercase group-hover:text-primary">
                   {t("goalPack")}
-                </Link>
+                </span>
               </div>
-            </article>
+            </Link>
             </RevealItem>
           ))}
         </RevealStagger>

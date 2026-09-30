@@ -26,7 +26,11 @@ type FilterId =
   | "preworkout"
   | "bcaa"
   | "creatine"
-  | "accessoires";
+  | "accessoires"
+  | "vegan"
+  | "casein"
+  | "collagen"
+  | "eaa";
 
 const PAGE_SIZE = 8;
 
@@ -47,7 +51,12 @@ const FILTERS: {
     labelKey: "preworkout",
     test: (product) => product.category === "preworkout",
   },
-  { id: "bcaa", labelKey: "catAmino", test: (product) => product.category === "bcaa" },
+  { id: "bcaa", labelKey: "catAmino", test: (product) => product.category === "bcaa" || product.category === "eaa" },
+  {
+    id: "eaa",
+    labelKey: "catEaa",
+    test: (product) => product.category === "eaa",
+  },
   {
     id: "creatine",
     labelKey: "creatine",
@@ -57,6 +66,21 @@ const FILTERS: {
     id: "accessoires",
     labelKey: "catAccess",
     test: (product) => product.category === "accessoires",
+  },
+  {
+    id: "vegan",
+    labelKey: "catVegan",
+    test: (product) => product.category === "vegan",
+  },
+  {
+    id: "casein",
+    labelKey: "catCasein",
+    test: (product) => product.category === "casein",
+  },
+  {
+    id: "collagen",
+    labelKey: "catCollagen",
+    test: (product) => product.category === "collagen",
   },
 ];
 

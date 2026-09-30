@@ -213,6 +213,70 @@ html[lang="ar"] .product-add-btn {
   animation: hero-float 4.5s ease-in-out infinite;
 }
 
+.hero-visual {
+  transform-origin: center center;
+  transition: transform 0.7s ease;
+}
+
+.hero-product-link:hover .hero-visual,
+.hero-product-link:focus-visible .hero-visual {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.hero-product-link:hover .hero-float,
+.hero-product-link:focus-visible .hero-float {
+  animation-play-state: paused;
+}
+
+@keyframes stock-dot-flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes stock-dot-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.stock-dot-core {
+  animation: stock-dot-flash 1.1s ease-in-out infinite;
+}
+
+.stock-dot-ring {
+  animation: stock-dot-ping 1.4s ease-out infinite;
+}
+
+.product-card-visual {
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-card-visual,
+.product-card:focus-within .product-card-visual {
+  transform: scale(1.1);
+}
+
+.goal-card-visual {
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+.goal-card:hover .goal-card-visual,
+.goal-card:focus-within .goal-card-visual {
+  transform: scale(1.06);
+}
+
 .cart-item-shadow {
   transition:
     box-shadow 0.3s ease,
@@ -421,14 +485,10 @@ html[lang="ar"] .product-add-btn {
     animation: none !important;
   }
 
-  .product-card-image,
-  .group:hover .product-card-image,
-  .goal-card-image,
-  .group:hover .goal-card-image,
-  .hero-product-image {
-    transition: none !important;
-    scale: 1 !important;
-    rotate: 0deg !important;
+  .hero-visual,
+  .product-card-visual,
+  .goal-card-visual {
+    transition-duration: 0.2s;
   }
 
   .hero-pulse {

@@ -13,6 +13,10 @@ export function SiteFooter() {
   const categoryLinks = [
     { href: "/catalogue?categorie=whey", label: t("catWhey") },
     { href: "/catalogue?categorie=mass", label: t("catGainers") },
+    { href: "/catalogue?categorie=vegan", label: t("catVegan") },
+    { href: "/catalogue?categorie=casein", label: t("catCasein") },
+    { href: "/catalogue?categorie=collagen", label: t("catCollagen") },
+    { href: "/catalogue?categorie=eaa", label: t("catEaa") },
     { href: "/catalogue?categorie=preworkout", label: t("preworkout") },
     { href: "/catalogue?categorie=accessoires", label: t("catAccess") },
   ];

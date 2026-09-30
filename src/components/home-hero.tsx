@@ -151,19 +151,21 @@ export function HomeHero() {
         >
           <Link
             href={`/produit/${product.id}`}
-            className="group relative z-20 block"
+            className="hero-product-link group relative z-20 block"
           >
-            <div className="hero-pulse absolute -top-16 -right-8 size-32 animate-pulse rounded-full border-[16px] border-primary/20" />
-            <div className="absolute top-1/2 -left-16 z-0 h-1 w-28 rotate-45 bg-primary" />
+            <div className="hero-pulse pointer-events-none absolute -top-16 -right-8 size-32 animate-pulse rounded-full border-[16px] border-primary/20" />
+            <div className="pointer-events-none absolute top-1/2 -left-16 z-0 h-1 w-28 rotate-45 bg-primary" />
             <div className="hero-float relative h-[360px] w-[280px] md:h-[500px] md:w-[400px] lg:h-[560px] lg:w-[440px]">
-              <BlurImage
-                src={productImage(product)}
-                alt={product.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 440px, 70vw"
-                className="hero-product-image product-shadow object-contain transition-transform duration-700 group-hover:scale-105 group-hover:rotate-2"
-              />
+              <div className="hero-visual absolute inset-0">
+                <BlurImage
+                  src={productImage(product)}
+                  alt={product.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 440px, 70vw"
+                  className="product-shadow object-contain"
+                />
+              </div>
             </div>
             {product.detail ? (
               <motion.div
@@ -198,7 +200,10 @@ export function HomeHero() {
               </div>
             </motion.div>
             <div className="absolute -bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap border border-primary/50 bg-zinc-900 px-5 py-2 text-white">
-              <span className="hero-pulse size-2 animate-ping rounded-full bg-primary" />
+              <span className="relative flex size-2.5 shrink-0" aria-hidden>
+                <span className="stock-dot-ring absolute inset-0 rounded-full bg-primary" />
+                <span className="stock-dot-core relative size-2.5 rounded-full bg-primary" />
+              </span>
               <span className="text-[10px] font-bold tracking-widest uppercase">
                 {t("heroBadgeStock")}
               </span>

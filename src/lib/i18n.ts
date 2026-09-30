@@ -126,6 +126,10 @@ export const translations = {
     catGainers: "Gainers",
     catAmino: "Acides aminés",
     catAccess: "Accessoires",
+    catVegan: "Vegan",
+    catCasein: "Caséine",
+    catCollagen: "Collagène",
+    catEaa: "EAA",
     brandsTitle: "Marques",
     brandOurs: "Protein Shop",
     priceRange: "Prix (DT)",
@@ -208,6 +212,14 @@ export const translations = {
       "Pré-workout en stock à Tunis — format et saveur ci-dessus. Photos réelles, commande WhatsApp, paiement à la livraison.",
     pdpLeadAccessoires:
       "Accessoire en stock à Tunis. Photos réelles, commande WhatsApp, paiement à la livraison.",
+    pdpLeadVegan:
+      "Protéine végétale en stock à Tunis — format et saveur ci-dessus. Photos réelles, commande WhatsApp, paiement à la livraison.",
+    pdpLeadCasein:
+      "Caséine en stock à Tunis — format et saveur ci-dessus. Photos réelles, commande WhatsApp, paiement à la livraison.",
+    pdpLeadCollagen:
+      "Collagène marin en stock à Tunis — format indiqué. Photos réelles, commande WhatsApp, paiement à la livraison.",
+    pdpLeadEaa:
+      "EAA en stock à Tunis — format et saveur ci-dessus. Photos réelles, commande WhatsApp, paiement à la livraison.",
     checkoutSummary: "Résumé de la commande",
     checkoutHelp: "Besoin d'aide ?",
     checkoutHelpBody:
@@ -349,6 +361,10 @@ export const translations = {
     catGainers: "الجينر",
     catAmino: "أحماض أمينية",
     catAccess: "إكسسوارات",
+    catVegan: "نباتي",
+    catCasein: "كازين",
+    catCollagen: "كولاجين",
+    catEaa: "EAA",
     brandsTitle: "العلامات",
     brandOurs: "Protein Shop",
     priceRange: "السعر (د.ت)",
@@ -429,6 +445,14 @@ export const translations = {
       "مكمل ما قبل التمرين متوفر في تونس — الحجم والنكهة أعلاه. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
     pdpLeadAccessoires:
       "إكسسوار متوفر في تونس. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
+    pdpLeadVegan:
+      "بروتين نباتي متوفر في تونس — الحجم والنكهة أعلاه. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
+    pdpLeadCasein:
+      "كازين متوفر في تونس — الحجم والنكهة أعلاه. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
+    pdpLeadCollagen:
+      "كولاجين بحري متوفر في تونس — الحجم أعلاه. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
+    pdpLeadEaa:
+      "EAA متوفر في تونس — الحجم والنكهة أعلاه. صور حقيقية، طلب واتساب، الدفع عند الاستلام.",
     checkoutSummary: "ملخص الطلب",
     checkoutHelp: "تحتاج مساعدة؟",
     checkoutHelpBody: "سؤال عن المخزون أو نصيحة مدرب؟ راسلنا على واتساب.",

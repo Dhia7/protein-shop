@@ -32,6 +32,10 @@ const PDP_LEAD: Record<ProductCategory, TranslationKey> = {
   creatine: "pdpLeadCreatine",
   preworkout: "pdpLeadPreworkout",
   accessoires: "pdpLeadAccessoires",
+  vegan: "pdpLeadVegan",
+  casein: "pdpLeadCasein",
+  collagen: "pdpLeadCollagen",
+  eaa: "pdpLeadEaa",
 };
 
 export function ProductDetail({

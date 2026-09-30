@@ -66,14 +66,14 @@ export function ProductCard({
               {product.tag}
             </span>
           ) : null}
-          <div className="absolute -inset-[12%]">
+          <div className="product-card-visual absolute -inset-[12%]">
             <BlurImage
               src={productImage(product)}
               alt={product.alt}
               fill
               priority={priority}
               sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
-              className="product-card-image object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-focus-within:scale-105"
+              className="object-cover"
             />
           </div>
         </div>

@@ -20,7 +20,7 @@ export function HomeCta() {
         }}
       />
       <Reveal className={WRAP}>
-        <h2 className="font-display mx-auto mb-6 max-w-[16ch] text-[clamp(44px,7vw,84px)]">
+        <h2 className="section-display font-display mx-auto mb-6 max-w-[16ch] text-[clamp(44px,7vw,84px)]">
           {t("homeCtaTitle")}
         </h2>
         <p className="mb-9 text-zinc-400">{t("homeCtaLead")}</p>

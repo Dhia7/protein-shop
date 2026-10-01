@@ -27,11 +27,11 @@ export function SectionHead({
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="font-display max-w-[16ch] text-[clamp(36px,5vw,64px)]">
+        <h2 className="section-display font-display max-w-[16ch] text-[clamp(36px,5vw,64px)]">
           {title}
         </h2>
       </div>
-      <div className="flex max-w-[36ch] flex-col items-start gap-4 sm:items-end">
+          <div className="flex max-w-[36ch] flex-col items-start gap-4 sm:items-end">
         {description ? (
           <p className="text-[15px] leading-relaxed text-zinc-500">
             {description}

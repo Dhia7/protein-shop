@@ -84,7 +84,7 @@ export function OrderConfirmation() {
             {t("confirmLead")}
           </motion.p>
         </div>
-        <div className="pointer-events-none absolute top-0 -right-20 font-display text-[300px] text-black/5 select-none">
+        <div className="pointer-events-none absolute top-0 -end-20 font-display text-[300px] text-black/5 select-none" dir="ltr">
           OK
         </div>
       </header>
@@ -135,10 +135,10 @@ export function OrderConfirmation() {
                         ) : null}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h4 className="text-lg leading-tight font-bold uppercase">
+                        <h4 className="text-lg leading-tight font-bold uppercase" dir="ltr">
                           {item.name}
                         </h4>
-                        <p className="text-xs font-bold tracking-widest text-zinc-500 uppercase">
+                        <p className="text-xs font-bold tracking-widest text-zinc-500 uppercase" dir="ltr">
                           {item.flavour} | {item.size}
                         </p>
                       </div>

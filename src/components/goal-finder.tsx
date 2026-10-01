@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { StaticImageData } from "next/image";
+import { ArrowRight } from "lucide-react";
 import { BlurImage } from "@/components/blur-image";
 import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
 import { SectionHead } from "@/components/section-head";
@@ -96,8 +97,9 @@ export function GoalFinder() {
                 <p className="mb-4 text-sm leading-relaxed text-zinc-500">
                   {t(goal.bodyKey)}
                 </p>
-                <span className="text-[13px] font-extrabold tracking-[0.08em] text-black uppercase group-hover:text-primary">
+                <span className="inline-flex items-center gap-2 text-[13px] font-extrabold tracking-[0.08em] text-black uppercase group-hover:text-primary">
                   {t("goalPack")}
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                 </span>
               </div>
             </Link>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Bebas_Neue, Noto_Sans_Arabic } from "next/font/google";
+import { Archivo, Bebas_Neue, Cairo, Noto_Sans_Arabic } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteProviders } from "@/components/site-providers";
@@ -17,6 +17,13 @@ const bebas = Bebas_Neue({
   weight: "400",
   subsets: ["latin", "latin-ext"],
   variable: "--font-bebas",
+});
+
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
+  weight: ["800"],
+  adjustFontFallback: false,
 });
 
 const notoArabic = Noto_Sans_Arabic({
@@ -45,13 +52,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
-      className={`${archivo.variable} ${bebas.variable} ${notoArabic.variable} h-full antialiased`}
+      className={`${archivo.variable} ${bebas.variable} ${notoArabic.variable} ${cairo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var h=document.documentElement;h.removeAttribute("data-qb-installed");h.removeAttribute("suppresshydrationwarning");})();`,
+            __html: `(function(){var h=document.documentElement;h.removeAttribute("data-qb-installed");h.removeAttribute("suppresshydrationwarning");try{var l=localStorage.getItem("protein-shop-locale");if(l==="ar"){h.lang="ar";h.dir="rtl";}}catch(e){}})();`,
           }}
         />
         <MotionProvider>

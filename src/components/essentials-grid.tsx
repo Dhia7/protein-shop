@@ -23,7 +23,7 @@ export function EssentialsGrid({ products }: { products: Product[] }) {
                 {t("arrivalsEyebrow")}
               </span>
             </div>
-            <h2 className="font-display text-6xl leading-none">
+            <h2 className="section-display font-display text-6xl leading-none">
               {t("arrivalsTitle")}
             </h2>
           </div>
@@ -32,7 +32,7 @@ export function EssentialsGrid({ products }: { products: Product[] }) {
             className="group inline-flex items-center gap-4 bg-black px-8 py-4 text-xs font-black tracking-[0.2em] text-white uppercase no-underline transition-colors hover:bg-primary hover:text-black"
           >
             {t("arrivalsCta")}
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-2" />
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-2 rtl:rotate-180 rtl:group-hover:-translate-x-2" />
           </Link>
         </Reveal>
         <RevealStagger className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">

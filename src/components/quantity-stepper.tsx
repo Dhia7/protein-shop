@@ -28,6 +28,7 @@ export function QuantityStepper({
 
   return (
     <div
+      dir="ltr"
       className={cn(
         "flex items-center bg-white",
         large

@@ -17,7 +17,8 @@ import { QuantityStepper } from "@/components/quantity-stepper";
 import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
 import { productImage } from "@/lib/media";
 import {
-  categoryLabel,
+  CATEGORY_LABEL_KEYS,
+  PRODUCT_TAG_KEYS,
   type Product,
   type ProductCategory,
 } from "@/lib/products";
@@ -88,14 +89,19 @@ export function ProductDetail({
   }
 
   const addLabel = justAdded ? t("addedToCart") : t("productCta");
+  const tagLabel = product.tag
+    ? PRODUCT_TAG_KEYS[product.tag]
+      ? t(PRODUCT_TAG_KEYS[product.tag])
+      : product.tag
+    : null;
   const facts = [
-    { label: t("categories"), value: categoryLabel(product.category) },
-    { label: t("flavour"), value: product.flavour },
-    { label: t("format"), value: product.size },
+    { label: t("categories"), value: t(CATEGORY_LABEL_KEYS[product.category]) },
+    { label: t("flavour"), value: product.flavour, latin: true },
+    { label: t("format"), value: product.size, latin: true },
     ...(product.detail
-      ? [{ label: t("productFacts"), value: product.detail }]
+      ? [{ label: t("productFacts"), value: product.detail, latin: true }]
       : []),
-    { label: t("priceWord"), value: product.price },
+    { label: t("priceWord"), value: product.price, latin: true },
   ];
 
   return (
@@ -113,10 +119,10 @@ export function ProductDetail({
             href={`/catalogue?categorie=${product.category}`}
             className="no-underline hover:text-primary"
           >
-            {categoryLabel(product.category)}
+            {t(CATEGORY_LABEL_KEYS[product.category])}
           </Link>
           <ChevronRight className="size-3 rtl:rotate-180" aria-hidden />
-          <span className="text-black">{product.name}</span>
+          <span className="text-black" dir="ltr">{product.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
@@ -125,10 +131,10 @@ export function ProductDetail({
               ref={imageRef}
               className="group relative overflow-hidden border-2 border-zinc-100 bg-white p-8 md:p-12"
             >
-              <div className="diagonal-stripe absolute top-0 right-0 z-0 size-32 translate-x-16 -translate-y-16 rotate-45" />
-              {product.tag ? (
+              <div className="diagonal-stripe absolute top-0 end-0 z-0 size-32 translate-x-16 -translate-y-16 rotate-45 rtl:-translate-x-16" />
+              {tagLabel ? (
                 <span className="absolute top-4 start-4 z-[1] bg-black px-2 py-1 text-[10px] font-black tracking-widest text-primary uppercase">
-                  {product.tag}
+                  {tagLabel}
                 </span>
               ) : null}
               <BlurImage
@@ -162,9 +168,9 @@ export function ProductDetail({
           <div className="space-y-8 lg:col-span-6">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-3">
-                {product.tag ? (
+                {tagLabel ? (
                   <span className="bg-black px-2 py-1 text-[10px] font-black tracking-widest text-primary uppercase">
-                    {product.tag}
+                    {tagLabel}
                   </span>
                 ) : null}
                 <span className="flex items-center gap-1 text-xs font-bold text-emerald-600">
@@ -172,17 +178,19 @@ export function ProductDetail({
                   {t("inStock")}
                 </span>
               </div>
-              <h1 className="font-display text-6xl leading-none text-black">
-                {product.name}
+              <h1 className="section-display text-6xl leading-none text-black">
+                <span dir="ltr" className="font-display">
+                  {product.name}
+                </span>
                 <br />
-                <span className="italic text-primary">
-                  {categoryLabel(product.category)}
+                <span className="font-display italic text-primary">
+                  {t(CATEGORY_LABEL_KEYS[product.category])}
                 </span>
               </h1>
             </div>
 
             <div className="flex items-baseline gap-4 border-b border-zinc-100 pb-8">
-              <span className="font-display text-5xl tracking-wide">
+              <span className="font-display text-5xl tracking-wide" dir="ltr">
                 {product.price}
               </span>
             </div>
@@ -193,7 +201,7 @@ export function ProductDetail({
                   {t("flavour")}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase">
+                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase" dir="ltr">
                     {product.flavour}
                   </span>
                 </div>
@@ -203,7 +211,7 @@ export function ProductDetail({
                   {t("format")}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase">
+                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase" dir="ltr">
                     {product.size}
                   </span>
                 </div>
@@ -261,7 +269,7 @@ export function ProductDetail({
               <ul className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2">
                 <li className="flex items-center gap-2 text-xs font-bold uppercase">
                   <Check className="size-4 text-primary" aria-hidden />
-                  {product.detail}
+                  <span dir="ltr">{product.detail}</span>
                 </li>
                 <li className="flex items-center gap-2 text-xs font-bold uppercase">
                   <Check className="size-4 text-primary" aria-hidden />
@@ -287,7 +295,10 @@ export function ProductDetail({
                     <span className="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">
                       {row.label}
                     </span>
-                    <span className="font-display text-xl text-end">
+                    <span
+                      className="font-display text-xl text-end"
+                      dir={"latin" in row && row.latin ? "ltr" : undefined}
+                    >
                       {row.value}
                     </span>
                   </div>

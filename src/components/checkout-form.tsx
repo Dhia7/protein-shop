@@ -209,6 +209,7 @@ export function CheckoutForm() {
                 <input
                   id="checkout-zip"
                   className="input-field"
+                  dir="ltr"
                   placeholder={t("checkoutZipPh")}
                   value={zip}
                   onChange={(event) => setZip(event.target.value)}
@@ -222,7 +223,7 @@ export function CheckoutForm() {
                 >
                   {t("checkoutPhone")}
                 </label>
-                <div className="flex">
+                <div className="flex" dir="ltr">
                   <span className="border border-e-0 border-zinc-200 bg-zinc-100 px-4 py-3 text-zinc-500">
                     +216
                   </span>
@@ -230,6 +231,7 @@ export function CheckoutForm() {
                     id="checkout-phone"
                     type="tel"
                     className="input-field"
+                    dir="ltr"
                     placeholder={t("checkoutPhonePh")}
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}

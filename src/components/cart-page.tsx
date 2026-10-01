@@ -13,7 +13,7 @@ import { QuantityStepper } from "@/components/quantity-stepper";
 import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
 import { ShopButton } from "@/components/shop-button";
 import { PRODUCT_IMAGES } from "@/lib/media";
-import { getProduct, productHref, categoryLabel } from "@/lib/products";
+import { getProduct, productHref, CATEGORY_LABEL_KEYS } from "@/lib/products";
 import { WRAP } from "@/lib/site";
 
 export function CartPage() {
@@ -23,9 +23,9 @@ export function CartPage() {
   return (
     <div className="bg-grid flex-1 bg-white">
       <div className="relative overflow-hidden bg-black py-16 text-white">
-        <div className="absolute top-0 right-0 h-full w-[40%] translate-x-[30%] -skew-x-[20deg] bg-primary opacity-20" />
+        <div className="absolute top-0 end-0 h-full w-[40%] translate-x-[30%] -skew-x-[20deg] bg-primary opacity-20 rtl:-translate-x-[30%] rtl:skew-x-[20deg]" />
         <div className={`${WRAP} relative z-10`}>
-          <h1 className="font-display text-7xl tracking-tighter uppercase md:text-8xl">
+          <h1 className="section-display font-display text-7xl tracking-tighter uppercase md:text-8xl">
             {t("cartPageTitle")}
           </h1>
           <div className="mt-4 flex items-center gap-4">
@@ -85,19 +85,23 @@ export function CartPage() {
                             <div>
                               <p className="text-[10px] font-black tracking-widest text-zinc-400 uppercase">
                                 {product
-                                  ? categoryLabel(product.category)
+                                  ? t(CATEGORY_LABEL_KEYS[product.category])
                                   : t("shop")}
                               </p>
                               <h3 className="font-display mt-1 text-2xl uppercase">
                                 <Link
                                   href={href}
                                   className="text-foreground no-underline hover:text-primary"
+                                  dir="ltr"
                                 >
                                   {item.name}
                                 </Link>
                               </h3>
                               <p className="text-sm font-bold tracking-wider text-zinc-500 uppercase">
-                                {t("flavour")}: {item.flavour} · {item.size}
+                                {t("flavour")}:{" "}
+                                <span dir="ltr">
+                                  {item.flavour} · {item.size}
+                                </span>
                               </p>
                             </div>
                             <button

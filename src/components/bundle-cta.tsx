@@ -13,9 +13,9 @@ export function BundleCta() {
       <div className={WRAP}>
         <Reveal>
         <div className="relative overflow-hidden bg-black px-8 py-12 text-white md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-8 md:px-14 md:py-16">
-          <div className="diagonal-stripe pointer-events-none absolute -top-10 -right-16 h-40 w-56 opacity-80" />
+          <div className="diagonal-stripe pointer-events-none absolute -top-10 -end-16 h-40 w-56 opacity-80" />
           <div>
-            <h3 className="font-display mb-3 text-[clamp(32px,4vw,52px)]">
+            <h3 className="section-display font-display mb-3 text-[clamp(32px,4vw,52px)]">
               {t("bundleTitle")}
             </h3>
             <p className="max-w-[52ch] text-[15px] leading-relaxed text-zinc-400">

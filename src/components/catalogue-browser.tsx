@@ -194,7 +194,7 @@ export function CatalogueBrowser({
               </li>
             </ol>
           </nav>
-          <h1 className="font-display text-6xl text-black">{t("allProducts")}</h1>
+          <h1 className="section-display font-display text-6xl text-black">{t("allProducts")}</h1>
         </div>
       </div>
 
@@ -424,10 +424,10 @@ export function CatalogueBrowser({
           className={`${WRAP} grid grid-cols-1 items-center gap-12 md:grid-cols-2`}
         >
           <div className="text-black">
-            <h2 className="font-display mb-4 text-5xl leading-[0.9] uppercase">
+            <h2 className="section-display font-display mb-4 text-5xl leading-[0.9] uppercase">
               {t("joinTeam")}
               <br />
-              <span className="text-white">Protein Shop</span>
+              <span className="text-white" dir="ltr">Protein Shop</span>
             </h2>
             <p className="text-xs font-bold tracking-widest uppercase italic">
               {t("joinTeamLead")}
@@ -455,7 +455,7 @@ export function CatalogueBrowser({
               />
               <button
                 type="submit"
-                className="bg-black px-8 py-4 text-sm font-black tracking-widest text-white uppercase shadow-[6px_6px_0_rgba(0,0,0,0.2)] transition-colors hover:bg-zinc-800 active:translate-x-1 active:translate-y-1 active:shadow-none"
+                className="bg-black px-8 py-4 text-sm font-black tracking-widest text-white uppercase shadow-[6px_6px_0_rgba(0,0,0,0.2)] transition-colors hover:bg-zinc-800 active:translate-x-1 active:translate-y-1 active:shadow-none rtl:shadow-[-6px_6px_0_rgba(0,0,0,0.2)] rtl:active:-translate-x-1"
               >
                 {t("subscribe")}
               </button>

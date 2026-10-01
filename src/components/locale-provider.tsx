@@ -3,7 +3,7 @@
 import {
   createContext,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -31,16 +31,18 @@ function applyDocumentLocale(locale: Locale) {
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("fr");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
       if (stored === "ar" || stored === "fr") {
         setLocaleState(stored);
         applyDocumentLocale(stored);
+        return;
       }
     } catch {
       /* ignore */
     }
+    applyDocumentLocale("fr");
   }, []);
 
   const value = useMemo<LocaleContextValue>(

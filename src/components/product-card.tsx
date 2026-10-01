@@ -8,7 +8,7 @@ import { useCart } from "@/components/cart-provider";
 import { useLocale } from "@/components/locale-provider";
 import { QuantityStepper } from "@/components/quantity-stepper";
 import { productImage } from "@/lib/media";
-import { categoryLabel, productHref, type Product } from "@/lib/products";
+import { CATEGORY_LABEL_KEYS, PRODUCT_TAG_KEYS, productHref, type Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 const ADDED_MS = 1100;
@@ -63,7 +63,7 @@ export function ProductCard({
         <div className="relative aspect-square overflow-hidden bg-zinc-100">
           {product.tag ? (
             <span className="absolute top-3 start-3 z-[2] bg-black px-2 py-1 text-[8px] font-black text-primary uppercase italic">
-              {product.tag}
+              {PRODUCT_TAG_KEYS[product.tag] ? t(PRODUCT_TAG_KEYS[product.tag]) : product.tag}
             </span>
           ) : null}
           <div className="product-card-visual absolute -inset-[12%]">
@@ -82,23 +82,28 @@ export function ProductCard({
       <div className="flex flex-1 flex-col space-y-1.5 p-4">
         <div className="flex items-start justify-between gap-2">
           <span className="text-[9px] font-black tracking-widest text-zinc-400 uppercase">
-            {catalog ? t("brandOurs") : categoryLabel(product.category)}
+            {catalog ? (
+              <span dir="ltr">{t("brandOurs")}</span>
+            ) : (
+              t(CATEGORY_LABEL_KEYS[product.category])
+            )}
           </span>
         </div>
         <h3 className="text-base leading-tight font-bold uppercase">
           <Link
             href={href}
             className="text-foreground no-underline transition-colors group-hover:text-primary"
+            dir="ltr"
           >
             {product.name}
           </Link>
         </h3>
         {!compact && !catalog && product.detail ? (
-          <p className="text-xs text-zinc-500">{product.detail}</p>
+          <p className="text-xs text-zinc-500" dir="ltr">{product.detail}</p>
         ) : null}
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-          <p className="font-display text-3xl leading-none">{product.price}</p>
+          <p className="font-display text-3xl leading-none" dir="ltr">{product.price}</p>
           <div className="flex items-center gap-2">
             {catalog ? null : (
               <div

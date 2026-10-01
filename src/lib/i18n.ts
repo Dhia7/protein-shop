@@ -16,6 +16,7 @@ export const translations = {
     ticker: "Livraison express partout en Tunisie — Commandez avant 14h",
     heroEyebrow: "La référence fitness en Tunisie",
     heroTitleA: "No limit",
+    heroTitleMid: "Limit",
     heroTitleB: "Results.",
     heroLead:
       "Accélérez vos performances avec les compléments alimentaires les plus puissants du marché.",
@@ -75,7 +76,9 @@ export const translations = {
     creatine: "Créatine",
     whey: "Protéines",
     packs: "Packs",
-    goalPack: "Voir le pack →",
+    goalPack: "Voir le pack",
+    tagBestSeller: "Best-seller",
+    tagNew: "Nouveau",
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
     arrivalsDescription:
@@ -251,9 +254,10 @@ export const translations = {
     navCatalogue: "الكتالوج",
     navContact: "اتصل بنا",
     ticker: "توصيل سريع في كل تونس — اطلب قبل الساعة 14",
-    heroEyebrow: "مرجع اللياقة في تونس",
-    heroTitleA: "بدون حدود",
-    heroTitleB: "نتائج.",
+    heroEyebrow: "La référence fitness en Tunisie",
+    heroTitleA: "No limit",
+    heroTitleMid: "Limit",
+    heroTitleB: "Results.",
     heroLead:
       "سرّع أداءك مع أقوى المكملات الغذائية المتوفرة في السوق.",
     heroCta: "عرض الكتالوج",
@@ -310,7 +314,9 @@ export const translations = {
     creatine: "كرياتين",
     whey: "بروتينات",
     packs: "الباقات",
-    goalPack: "عرض الباقة ←",
+    goalPack: "عرض الباقة",
+    tagBestSeller: "الأكثر مبيعاً",
+    tagNew: "جديد",
     menuOpen: "فتح القائمة",
     menuClose: "إغلاق القائمة",
     arrivalsDescription:

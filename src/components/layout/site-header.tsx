@@ -32,7 +32,7 @@ function DesktopNav() {
   const category = searchParams.get("categorie");
 
   return (
-    <ul className="hidden list-none items-center gap-8 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex">
+    <ul className="site-nav hidden list-none items-center gap-5 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex xl:gap-8">
       {NAV_LINKS.map((item) => {
         const active = navLinkActive(item.href, pathname, category);
         return (
@@ -58,6 +58,7 @@ function LanguageToggle() {
 
   return (
     <div
+      dir="ltr"
       className="flex border border-line text-[11px] font-black tracking-[0.08em]"
       role="group"
       aria-label={t("language")}
@@ -150,7 +151,7 @@ function CartButton() {
       {count > 0 || displayCount > 0 ? (
         <span
           className={cn(
-            "absolute -top-2 -end-2 flex size-4 items-center justify-center rounded-full bg-black text-[10px] font-black text-primary",
+            "absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-black text-[10px] font-black text-primary",
             popBadge && "cart-badge-in",
           )}
         >
@@ -193,8 +194,8 @@ export function SiteHeader() {
 
   return (
     <>
-      <div className="sticky top-0 z-50">
-        <p className="border-b border-white/10 bg-black py-2.5 text-center text-[10px] font-bold tracking-[0.25em] text-primary uppercase md:text-xs">
+      <div className="sticky top-0 z-50" dir="ltr">
+        <p className="border-b border-white/10 bg-black px-4 py-2.5 text-center text-[10px] font-bold leading-relaxed tracking-[0.25em] text-primary uppercase md:text-xs">
           {t("ticker")}
         </p>
         <nav className="border-b border-black/5 bg-white">
@@ -202,7 +203,7 @@ export function SiteHeader() {
             <SiteLogo />
             <Suspense
               fallback={
-                <ul className="hidden list-none items-center gap-8 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex">
+                <ul className="site-nav hidden list-none items-center gap-5 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex xl:gap-8">
                   {NAV_LINKS.map((item) => (
                     <li key={item.href + item.labelKey}>
                       <Link
@@ -262,11 +263,11 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label={t("navHome")}
-            className="absolute inset-y-0 end-0 flex w-[min(20rem,88vw)] flex-col gap-6 border-s border-line bg-white p-5 pt-16"
+            className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col gap-6 border-l border-line bg-white p-5 pt-16"
           >
             <button
               type="button"
-              className="absolute top-4 end-4 flex size-10 items-center justify-center border border-line"
+              className="absolute top-4 right-4 flex size-10 items-center justify-center border border-line"
               aria-label={t("menuClose")}
               onClick={() => setMenuOpen(false)}
             >

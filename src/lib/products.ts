@@ -1,3 +1,5 @@
+import type { TranslationKey } from "@/lib/i18n";
+
 export type CategoryId =
   | "all"
   | "whey"
@@ -286,6 +288,24 @@ export function relatedProducts(product: Product, limit = 4) {
     (item) => item.category === product.category && item.id !== product.id,
   ).slice(0, limit);
 }
+
+export const CATEGORY_LABEL_KEYS: Record<ProductCategory, TranslationKey> = {
+  whey: "catWhey",
+  mass: "catGainers",
+  bcaa: "catAmino",
+  creatine: "creatine",
+  preworkout: "preworkout",
+  accessoires: "catAccess",
+  vegan: "catVegan",
+  casein: "catCasein",
+  collagen: "catCollagen",
+  eaa: "catEaa",
+};
+
+export const PRODUCT_TAG_KEYS: Record<string, TranslationKey> = {
+  "Best-seller": "tagBestSeller",
+  Nouveau: "tagNew",
+};
 
 export function categoryLabel(id: ProductCategory) {
   return CATEGORIES.find((category) => category.id === id)?.label ?? id;

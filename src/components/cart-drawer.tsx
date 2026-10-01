@@ -134,14 +134,15 @@ export function CartDrawer() {
                       <Link
                         href={href}
                         className="text-sm font-bold leading-snug text-foreground no-underline hover:text-primary"
+                        dir="ltr"
                       >
                         {item.name}
                       </Link>
-                      <p className="font-display shrink-0 text-base">
+                      <p className="font-display shrink-0 text-base" dir="ltr">
                         {formatPrice(lineTotal)}
                       </p>
                     </div>
-                    <p className="mt-0.5 text-xs text-zinc-500">
+                    <p className="mt-0.5 text-xs text-zinc-500" dir="ltr">
                       {item.size} · {item.flavour}
                       {item.quantity > 1
                         ? ` · ${item.price} × ${item.quantity}`

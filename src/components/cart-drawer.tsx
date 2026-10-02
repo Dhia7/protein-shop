@@ -133,16 +133,15 @@ export function CartDrawer() {
                     <div className="flex items-start justify-between gap-2">
                       <Link
                         href={href}
-                        className="text-sm font-bold leading-snug text-foreground no-underline hover:text-primary"
-                        dir="ltr"
+                        className="force-ltr text-sm font-bold leading-snug text-foreground no-underline hover:text-primary"
                       >
                         {item.name}
                       </Link>
-                      <p className="font-display shrink-0 text-base" dir="ltr">
+                      <p className="force-ltr font-display shrink-0 text-base">
                         {formatPrice(lineTotal)}
                       </p>
                     </div>
-                    <p className="mt-0.5 text-xs text-zinc-500" dir="ltr">
+                    <p className="force-ltr mt-0.5 text-xs text-zinc-500">
                       {item.size} · {item.flavour}
                       {item.quantity > 1
                         ? ` · ${item.price} × ${item.quantity}`

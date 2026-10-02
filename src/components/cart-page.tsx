@@ -22,22 +22,22 @@ export function CartPage() {
 
   return (
     <div className="bg-grid flex-1 bg-white">
-      <div className="relative overflow-hidden bg-black py-16 text-white">
+      <div className="relative overflow-hidden bg-black py-10 text-white md:py-16">
         <div className="absolute top-0 end-0 h-full w-[40%] translate-x-[30%] -skew-x-[20deg] bg-primary opacity-20 rtl:-translate-x-[30%] rtl:skew-x-[20deg]" />
         <div className={`${WRAP} relative z-10`}>
-          <h1 className="section-display font-display text-7xl tracking-tighter uppercase md:text-8xl">
+          <h1 className="section-display font-display text-[clamp(2.75rem,14vw,6rem)] tracking-tighter uppercase md:text-8xl">
             {t("cartPageTitle")}
           </h1>
           <div className="mt-4 flex items-center gap-4">
             <div className="h-1 w-12 bg-primary" />
-            <p className="font-bold tracking-[0.2em] text-zinc-400 uppercase">
+            <p className="font-bold tracking-[0.12em] text-zinc-400 uppercase sm:tracking-[0.2em]">
               {count} {t("cartArticles")}
             </p>
           </div>
         </div>
       </div>
 
-      <div className={`${WRAP} py-16`}>
+      <div className={`${WRAP} py-8 md:py-16`}>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
             {items.length === 0 ? (
@@ -64,7 +64,7 @@ export function CartPage() {
 
                   return (
                     <RevealItem key={item.id}>
-                      <div className="cart-item-shadow flex flex-col items-center gap-8 border-2 border-black bg-white p-6 md:flex-row">
+                      <div className="cart-item-shadow flex flex-col items-center gap-6 border-2 border-black bg-white p-4 sm:p-6 md:flex-row md:gap-8">
                         <Link
                           href={href}
                           className="relative size-32 shrink-0 overflow-hidden border border-zinc-100 bg-zinc-50 md:size-40"
@@ -91,15 +91,14 @@ export function CartPage() {
                               <h3 className="font-display mt-1 text-2xl uppercase">
                                 <Link
                                   href={href}
-                                  className="text-foreground no-underline hover:text-primary"
-                                  dir="ltr"
+                                  className="force-ltr text-foreground no-underline hover:text-primary"
                                 >
                                   {item.name}
                                 </Link>
                               </h3>
                               <p className="text-sm font-bold tracking-wider text-zinc-500 uppercase">
                                 {t("flavour")}:{" "}
-                                <span dir="ltr">
+                                <span className="force-ltr">
                                   {item.flavour} · {item.size}
                                 </span>
                               </p>
@@ -161,7 +160,7 @@ export function CartPage() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="sticky top-28 border-b-8 border-primary bg-black p-8 text-white shadow-2xl">
+            <div className="sticky top-28 border-b-8 border-primary bg-black p-5 text-white shadow-2xl sm:p-8">
               <h2 className="font-display mb-8 text-4xl tracking-wider uppercase">
                 {t("cartSummary")}
               </h2>
@@ -200,7 +199,7 @@ export function CartPage() {
                   {t("cartShop")}
                 </ShopButton>
               )}
-              <div className="flex items-center justify-center gap-2 py-4 text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase">
+              <div className="flex items-center justify-center gap-2 py-4 text-[10px] font-black tracking-[0.12em] text-zinc-500 uppercase sm:tracking-[0.2em]">
                 {t("cartCodSecure")}
               </div>
             </div>

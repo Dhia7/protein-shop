@@ -29,7 +29,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-primary/20 bg-black text-white">
-      <div className={`${WRAP} mb-12 grid grid-cols-1 gap-12 py-20 md:grid-cols-4`}>
+      <div className={`${WRAP} mb-12 grid grid-cols-1 gap-10 py-12 sm:grid-cols-2 sm:py-16 lg:grid-cols-4 lg:py-20`}>
         <div className="space-y-6">
           <SiteLogo inverse />
           <p className="text-sm leading-relaxed text-zinc-500">{t("footerBlurb")}</p>

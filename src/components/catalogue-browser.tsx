@@ -194,7 +194,9 @@ export function CatalogueBrowser({
               </li>
             </ol>
           </nav>
-          <h1 className="section-display font-display text-6xl text-black">{t("allProducts")}</h1>
+          <h1 className="section-display font-display text-[clamp(2.35rem,10vw,3.75rem)] text-black">
+            {t("allProducts")}
+          </h1>
         </div>
       </div>
 
@@ -372,7 +374,7 @@ export function CatalogueBrowser({
 
           {filtered.length > 0 ? (
             <div className="mt-16 flex justify-center">
-              <nav className="inline-flex items-center gap-2" aria-label="Pagination">
+              <nav className="inline-flex flex-wrap items-center justify-center gap-2" aria-label="Pagination">
                 <button
                   type="button"
                   className="flex size-12 items-center justify-center border-2 border-zinc-100 font-bold text-black transition-colors hover:border-primary disabled:opacity-30"
@@ -419,15 +421,15 @@ export function CatalogueBrowser({
         </section>
       </div>
 
-      <section className="mt-12 bg-primary py-20">
+      <section className="mt-12 bg-primary py-12 md:py-20">
         <div
           className={`${WRAP} grid grid-cols-1 items-center gap-12 md:grid-cols-2`}
         >
           <div className="text-black">
-            <h2 className="section-display font-display mb-4 text-5xl leading-[0.9] uppercase">
+            <h2 className="section-display font-display mb-4 text-[clamp(2.1rem,8vw,3rem)] leading-[0.9] uppercase">
               {t("joinTeam")}
               <br />
-              <span className="text-white" dir="ltr">Protein Shop</span>
+              <span className="force-ltr text-white">Protein Shop</span>
             </h2>
             <p className="text-xs font-bold tracking-widest uppercase italic">
               {t("joinTeamLead")}

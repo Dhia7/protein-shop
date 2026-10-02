@@ -19,17 +19,17 @@ export function EssentialsGrid({ products }: { products: Product[] }) {
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-primary">
               <div className="h-1 w-8 bg-primary" />
-              <span className="text-sm font-black tracking-[0.4em] uppercase">
+              <span className="text-sm font-black tracking-[0.16em] uppercase sm:tracking-[0.4em]">
                 {t("arrivalsEyebrow")}
               </span>
             </div>
-            <h2 className="section-display font-display text-6xl leading-none">
+            <h2 className="section-display font-display text-[clamp(2.25rem,9vw,3.75rem)] leading-none">
               {t("arrivalsTitle")}
             </h2>
           </div>
           <Link
             href="/catalogue"
-            className="group inline-flex items-center gap-4 bg-black px-8 py-4 text-xs font-black tracking-[0.2em] text-white uppercase no-underline transition-colors hover:bg-primary hover:text-black"
+            className="group inline-flex items-center gap-3 bg-black px-5 py-3 text-[10px] font-black tracking-[0.16em] text-white uppercase no-underline transition-colors hover:bg-primary hover:text-black sm:gap-4 sm:px-8 sm:py-4 sm:text-xs sm:tracking-[0.2em]"
           >
             {t("arrivalsCta")}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-2 rtl:rotate-180 rtl:group-hover:-translate-x-2" />

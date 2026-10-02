@@ -12,22 +12,24 @@ export function SiteLogo({
   return (
     <Link
       href="/"
-      className={cn("flex items-center gap-2.5 no-underline", className)}
-      dir="ltr"
+      className={cn(
+        "force-ltr flex min-w-0 items-center gap-2 no-underline sm:gap-2.5",
+        className,
+      )}
     >
-      <span className="flex size-10 items-center justify-center rounded bg-primary text-black">
-        <Zap className="size-5 fill-current" aria-hidden />
+      <span className="flex size-8 shrink-0 items-center justify-center rounded bg-primary text-black sm:size-10">
+        <Zap className="size-4 fill-current sm:size-5" aria-hidden />
       </span>
-      <span className="flex flex-col leading-none">
+      <span className="flex min-w-0 flex-col leading-none">
         <span
           className={cn(
-            "font-display text-2xl tracking-wider",
+            "font-display text-[1.15rem] tracking-wider whitespace-nowrap sm:text-2xl",
             inverse ? "text-white" : "text-foreground",
           )}
         >
           Protein Shop
         </span>
-        <span className="-mt-0.5 text-[9px] font-black tracking-[0.3em] text-primary uppercase">
+        <span className="-mt-0.5 text-[8px] font-black tracking-[0.22em] text-primary uppercase sm:text-[9px] sm:tracking-[0.3em]">
           Tunisie
         </span>
       </span>

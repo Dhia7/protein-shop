@@ -20,7 +20,7 @@ export function HomeHero() {
   const product = getHeroProduct();
 
   return (
-    <header dir="ltr" lang="en" className="home-hero relative overflow-hidden bg-white">
+    <header lang="en" className="home-hero force-ltr relative overflow-hidden bg-white">
       <div className="bg-grid absolute inset-0 opacity-50" />
       <div className="hero-shade" />
       <div className="hero-stripe diagonal-stripe" />
@@ -29,10 +29,10 @@ export function HomeHero() {
       </div>
 
       <div
-        className={`${WRAP} relative z-10 grid h-full items-center gap-10 py-14 lg:grid-cols-12 lg:gap-6 lg:py-0`}
+        className={`${WRAP} relative z-10 grid items-start gap-8 py-10 lg:grid-cols-12 lg:grid-rows-[auto_auto] lg:gap-x-6 lg:gap-y-6 lg:py-10`}
       >
         <motion.div
-          className="relative z-10 space-y-5 lg:col-span-6 lg:space-y-6 2xl:space-y-8"
+          className="relative z-10 space-y-5 lg:col-start-1 lg:row-start-1 lg:col-span-6 lg:space-y-6 2xl:space-y-8"
           initial="hidden"
           animate="show"
           variants={{
@@ -54,7 +54,7 @@ export function HomeHero() {
           </motion.div>
 
           <motion.div
-            className="mt-4 2xl:mt-8"
+            className="mt-2 2xl:mt-8"
             variants={{
               hidden: { opacity: 0, y: 28 },
               show: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
@@ -67,7 +67,17 @@ export function HomeHero() {
             </h1>
             <div className="mt-4 h-4 w-48 -skew-x-[20deg] bg-black md:w-64" />
           </motion.div>
+        </motion.div>
 
+        <motion.div
+          className="relative z-10 order-3 space-y-5 lg:order-none lg:col-start-1 lg:row-start-2 lg:col-span-6 lg:space-y-6 2xl:space-y-8"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.1, delayChildren: 0.28 } },
+          }}
+        >
           <motion.p
             className={cn(
               "max-w-lg border-s-4 border-primary ps-6 font-semibold text-zinc-600",
@@ -83,7 +93,7 @@ export function HomeHero() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap items-center gap-8 pt-2"
+            className="flex flex-col items-start gap-5 pt-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8"
             variants={{
               hidden: { opacity: 0, y: 16 },
               show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
@@ -121,21 +131,21 @@ export function HomeHero() {
           </motion.div>
 
           <motion.div
-            className="grid max-w-lg grid-cols-3 gap-6 pt-2 2xl:pt-4"
+            className="grid max-w-lg grid-cols-3 gap-3 pt-2 sm:gap-6 2xl:pt-4"
             variants={{
               hidden: { opacity: 0, y: 16 },
               show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
             }}
           >
             <div>
-              <div className="font-display text-5xl text-black" dir="ltr">
+              <div className="force-ltr font-display text-3xl text-black sm:text-5xl">
                 <CountUp to={PRODUCTS.length} />
               </div>
               <div
                 className={
                   arabicCopy
                     ? "mt-1 text-[11px] font-extrabold leading-5 text-zinc-500"
-                    : "text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase"
+                    : "text-[9px] font-black leading-tight tracking-wider text-zinc-500 uppercase sm:text-[10px] xl:tracking-[0.16em]"
                 }
                 lang={arabicCopy ? "ar" : "fr"}
               >
@@ -143,14 +153,14 @@ export function HomeHero() {
               </div>
             </div>
             <div>
-              <div className="font-display text-5xl text-black" dir="ltr">
+              <div className="force-ltr font-display text-3xl text-black sm:text-5xl">
                 <CountUp to={24} suffix="H" delay={0.12} />
               </div>
               <div
                 className={
                   arabicCopy
                     ? "mt-1 text-[11px] font-extrabold leading-5 text-zinc-500"
-                    : "text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase"
+                    : "text-[9px] font-black leading-tight tracking-wider text-zinc-500 uppercase sm:text-[10px] xl:tracking-[0.16em]"
                 }
                 lang={arabicCopy ? "ar" : "fr"}
               >
@@ -158,14 +168,14 @@ export function HomeHero() {
               </div>
             </div>
             <div>
-              <div className="font-display text-5xl text-black" dir="ltr">
+              <div className="force-ltr font-display text-3xl text-black sm:text-5xl">
                 <CountUp to={PARTNER_NAMES.length} delay={0.24} />
               </div>
               <div
                 className={
                   arabicCopy
                     ? "mt-1 text-[11px] font-extrabold leading-5 text-zinc-500"
-                    : "text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase"
+                    : "text-[9px] font-black leading-tight tracking-wider text-zinc-500 uppercase sm:text-[10px] xl:tracking-[0.16em]"
                 }
                 lang={arabicCopy ? "ar" : "fr"}
               >
@@ -176,18 +186,18 @@ export function HomeHero() {
         </motion.div>
 
         <motion.div
-          className="relative flex justify-center lg:col-span-6 lg:justify-end"
+          className="relative order-2 flex justify-center px-1 pb-8 lg:order-none lg:col-start-7 lg:row-start-1 lg:row-span-2 lg:col-span-6 lg:self-center lg:justify-end lg:px-0 lg:pb-0"
           initial={{ opacity: 0, x: 48, scale: 0.92 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
         >
           <Link
             href={`/produit/${product.id}`}
-            className="hero-product-link group relative z-20 block"
+            className="hero-product-link group relative z-20 mx-auto block w-full max-w-[22rem] lg:mx-0 lg:w-auto lg:max-w-none"
           >
-            <div className="hero-pulse pointer-events-none absolute -top-16 -right-8 size-32 animate-pulse rounded-full border-[16px] border-primary/20" />
-            <div className="pointer-events-none absolute top-1/2 -left-16 z-0 h-1 w-28 rotate-45 bg-primary" />
-            <div className="hero-float relative h-[300px] w-[240px] md:h-[400px] md:w-[320px] lg:h-[380px] lg:w-[300px] xl:h-[440px] xl:w-[340px] 2xl:h-[540px] 2xl:w-[420px]">
+            <div className="hero-pulse pointer-events-none absolute -top-16 -right-8 hidden size-32 animate-pulse rounded-full border-[16px] border-primary/20 lg:block" />
+            <div className="pointer-events-none absolute top-1/2 -left-16 z-0 hidden h-1 w-28 rotate-45 bg-primary lg:block" />
+            <div className="hero-float relative mx-auto aspect-[4/5] w-[min(78vw,20.5rem)] overflow-hidden md:h-[400px] md:w-[320px] md:aspect-auto lg:h-[380px] lg:w-[300px] lg:overflow-visible xl:h-[440px] xl:w-[340px] 2xl:h-[540px] 2xl:w-[420px]">
               <div className="hero-visual absolute inset-0">
                 <BlurImage
                   src={productImage(product)}
@@ -195,43 +205,43 @@ export function HomeHero() {
                   fill
                   priority
                   sizes="(min-width: 1536px) 420px, (min-width: 1024px) 340px, 70vw"
-                  className="product-shadow object-contain"
+                  className="product-shadow object-cover object-[50%_38%] lg:object-contain"
                 />
               </div>
             </div>
             {product.detail ? (
               <motion.div
-                className="absolute top-8 -left-4 z-20 flex rotate-[-8deg] flex-col items-center bg-black p-4 font-display text-3xl leading-none text-primary shadow-[10px_10px_0_rgba(255,193,7,0.3)] md:-left-6 md:p-5 md:text-4xl 2xl:text-5xl"
+                className="absolute top-3 left-3 z-20 flex rotate-[-8deg] flex-col items-center bg-black px-2.5 py-2 font-display text-2xl leading-none text-primary shadow-[6px_6px_0_rgba(255,193,7,0.3)] sm:top-8 sm:-left-4 sm:p-4 sm:text-3xl sm:shadow-[10px_10px_0_rgba(255,193,7,0.3)] md:-left-6 md:p-5 md:text-4xl 2xl:text-5xl"
                 initial={{ opacity: 0, y: -16, rotate: -8 }}
                 animate={{ opacity: 1, y: 0, rotate: -8 }}
                 transition={{ duration: 0.5, delay: 0.55, ease }}
               >
-                <Flame className="mb-1 size-6" aria-hidden />
-                <span dir="ltr">{product.detail.split(" ")[0]}</span>
-                <span className="mt-2 font-sans text-[10px] font-black tracking-[0.3em] uppercase">
+                <Flame className="mb-0.5 size-4 sm:mb-1 sm:size-6" aria-hidden />
+                <span className="force-ltr">{product.detail.split(" ")[0]}</span>
+                <span className="mt-1 hidden font-sans text-[8px] font-black tracking-[0.18em] uppercase sm:mt-2 sm:block sm:text-[10px] sm:tracking-[0.3em]">
                   {product.detail.replace(/^[^\s]+\s/, "")}
                 </span>
               </motion.div>
             ) : null}
             <motion.div
-              className="absolute right-0 bottom-10 z-20 flex -skew-x-[12deg] items-center gap-3 border-r-[12px] border-black bg-primary px-5 py-2.5 text-black shadow-2xl md:gap-4 md:px-6 md:py-3 xl:bottom-14 2xl:-right-6 2xl:bottom-16"
+              className="absolute right-1 bottom-12 z-20 flex -skew-x-[12deg] items-center gap-2 border-r-[8px] border-black bg-primary px-3 py-1.5 text-black shadow-2xl sm:right-0 sm:bottom-10 sm:gap-4 sm:border-r-[12px] sm:px-5 sm:py-2.5 md:gap-4 md:px-6 md:py-3 xl:bottom-14 2xl:-right-6 2xl:bottom-16"
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.7, ease }}
             >
-              <div className="flex size-12 items-center justify-center rounded-full bg-black">
-                <Dumbbell className="size-5 text-primary" aria-hidden />
+              <div className="flex size-8 items-center justify-center rounded-full bg-black sm:size-12">
+                <Dumbbell className="size-3.5 text-primary sm:size-5" aria-hidden />
               </div>
               <div className="flex skew-x-[12deg] flex-col">
-                <span className="font-display text-3xl leading-none md:text-4xl" dir="ltr">
+                <span className="force-ltr font-display text-2xl leading-none sm:text-3xl md:text-4xl">
                   {product.size}
                 </span>
-                <span className="text-[9px] font-black tracking-[0.25em] uppercase">
+                <span className="text-[8px] font-black tracking-[0.18em] uppercase sm:text-[9px] sm:tracking-[0.25em]">
                   {product.flavour}
                 </span>
               </div>
             </motion.div>
-            <div className="absolute -bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap border border-primary/50 bg-zinc-900 px-4 py-2 text-white md:-bottom-8 md:px-5">
+            <div className="absolute -bottom-1 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap border border-primary/50 bg-zinc-900 px-3 py-1.5 text-white sm:-bottom-6 sm:px-4 sm:py-2 md:-bottom-8 md:px-5">
               <span className="relative flex size-2.5 shrink-0" aria-hidden>
                 <span className="stock-dot-ring absolute inset-0 rounded-full bg-primary" />
                 <span className="stock-dot-core relative size-2.5 rounded-full bg-primary" />

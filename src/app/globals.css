@@ -101,6 +101,12 @@
   body {
     @apply overflow-x-hidden bg-background text-foreground antialiased;
   }
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
 }
 
 @utility font-display {
@@ -109,6 +115,11 @@
   letter-spacing: 0.01em;
   line-height: 0.88;
   text-transform: uppercase;
+}
+
+@utility force-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 html[lang="ar"] {
@@ -188,14 +199,20 @@ html[dir="rtl"] .hero-ar-kicker {
 .home-hero .hero-kicker {
   font-family: var(--font-archivo), sans-serif;
   font-weight: 900;
-  letter-spacing: 0.4em;
-  line-height: 1.2;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
   text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .home-hero .hero-kicker {
+    letter-spacing: 0.4em;
+  }
 }
 
 .home-hero .hero-title {
   font-family: var(--font-bebas), "Arial Narrow", sans-serif;
-  font-size: clamp(48px, 9.2vw, 120px);
+  font-size: clamp(40px, 12vw, 120px);
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 0.8;
@@ -230,9 +247,15 @@ html[lang="ar"] .home-hero .font-display {
 html[lang="ar"] .home-hero .hero-kicker {
   font-family: var(--font-archivo), sans-serif;
   font-weight: 900;
-  letter-spacing: 0.4em !important;
-  line-height: 1.2;
+  letter-spacing: 0.16em !important;
+  line-height: 1.25;
   text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  html[lang="ar"] .home-hero .hero-kicker {
+    letter-spacing: 0.4em !important;
+  }
 }
 
 html[lang="ar"] .home-hero .hero-title {
@@ -298,8 +321,7 @@ html[dir="rtl"] .home-hero .btn-primary:focus-visible {
 
 @media (min-width: 1024px) {
   .home-hero {
-    height: min(900px, calc(100dvh - 7.5rem));
-    min-height: 36rem;
+    min-height: min(42rem, calc(100dvh - 7.5rem));
   }
 
   .hero-shade,
@@ -315,10 +337,15 @@ html[lang="ar"] .site-nav {
 
 html[lang="ar"] .section-display {
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
-html[lang="ar"] [dir="ltr"] .font-display,
-html[lang="ar"] [dir="ltr"].font-display {
+.section-display {
+  overflow-wrap: break-word;
+}
+
+html[lang="ar"] .force-ltr .font-display,
+html[lang="ar"] .force-ltr.font-display {
   font-family: var(--font-bebas), "Arial Narrow", sans-serif;
   font-weight: 400;
   letter-spacing: 0.02em !important;
@@ -326,13 +353,13 @@ html[lang="ar"] [dir="ltr"].font-display {
   text-transform: uppercase;
 }
 
-html[lang="ar"] [dir="ltr"] .uppercase,
-html[lang="ar"] [dir="ltr"].uppercase {
+html[lang="ar"] .force-ltr .uppercase,
+html[lang="ar"] .force-ltr.uppercase {
   text-transform: uppercase;
 }
 
-html[lang="ar"] [dir="ltr"] [class*="tracking-"],
-html[lang="ar"] [dir="ltr"][class*="tracking-"] {
+html[lang="ar"] .force-ltr [class*="tracking-"],
+html[lang="ar"] .force-ltr[class*="tracking-"] {
   letter-spacing: 0.18em !important;
 }
 
@@ -362,18 +389,30 @@ html[dir="rtl"] .cart-item-shadow:focus-within {
   cursor: pointer;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.15rem 2.6rem;
-  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-  box-shadow: 8px 8px 0 #000;
+  max-width: 100%;
+  padding: 0.9rem 1.45rem;
+  font-size: 0.72rem;
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+  box-shadow: 6px 6px 0 #000;
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
     box-shadow 0.25s ease,
     translate 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .btn-primary {
+    letter-spacing: 0.15em;
+    padding: 1.15rem 2.6rem;
+    font-size: 0.875rem;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    box-shadow: 8px 8px 0 #000;
+  }
 }
 
 .btn-primary:hover,
@@ -444,6 +483,15 @@ html[dir="rtl"] .cart-item-shadow:focus-within {
 .hero-visual {
   transform-origin: center center;
   transition: transform 0.7s ease;
+}
+
+@media (max-width: 1023px) {
+  .home-hero .hero-visual img {
+    object-fit: cover;
+    object-position: 50% 34%;
+    transform: scale(1.48);
+    transform-origin: 50% 28%;
+  }
 }
 
 .hero-product-link:hover .hero-visual,
@@ -540,6 +588,14 @@ html[dir="rtl"] .cart-item-shadow:focus-within {
   top: 7.5rem;
   max-height: calc(100vh - 8.5rem);
   overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .filter-sticky {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 .custom-checkbox {

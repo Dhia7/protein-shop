@@ -10,7 +10,7 @@ export function HomeCta() {
   const { t } = useLocale();
 
   return (
-    <div className="relative overflow-hidden bg-black py-[110px] text-center text-white">
+    <div className="relative overflow-hidden bg-black py-16 text-center text-white md:py-[110px]">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
@@ -20,7 +20,7 @@ export function HomeCta() {
         }}
       />
       <Reveal className={WRAP}>
-        <h2 className="section-display font-display mx-auto mb-6 max-w-[16ch] text-[clamp(44px,7vw,84px)]">
+        <h2 className="section-display font-display mx-auto mb-6 max-w-[16ch] text-[clamp(2.25rem,8vw,5.25rem)]">
           {t("homeCtaTitle")}
         </h2>
         <p className="mb-9 text-zinc-400">{t("homeCtaLead")}</p>

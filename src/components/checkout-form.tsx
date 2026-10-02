@@ -102,42 +102,42 @@ export function CheckoutForm() {
   return (
     <form onSubmit={onSubmit} className={`${WRAP} py-12 md:py-16`}>
       <div className="mb-10">
-        <h1 className="font-display text-5xl md:text-6xl">{t("checkoutTitle")}</h1>
+        <h1 className="font-display text-[clamp(2.25rem,9vw,3.75rem)] md:text-6xl">{t("checkoutTitle")}</h1>
         <div className="mt-2 h-1.5 w-24 bg-primary" />
       </div>
 
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
         <div className="space-y-8 lg:col-span-8">
-          <div className="mb-8 flex max-w-2xl items-center justify-between">
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex size-10 items-center justify-center rounded-full bg-primary font-bold text-black">
+          <div className="mb-8 flex max-w-2xl items-start justify-between gap-1 sm:items-center sm:gap-0">
+            <div className="flex min-w-0 flex-col items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-black sm:size-10">
                 1
               </div>
-              <span className="text-[10px] font-black tracking-widest uppercase">
+              <span className="max-w-[7ch] text-center text-[9px] font-black tracking-wider uppercase sm:max-w-none sm:text-[10px] sm:tracking-widest">
                 {t("checkoutStepDelivery")}
               </span>
             </div>
-            <div className="mx-4 mb-6 h-0.5 flex-1 bg-primary" />
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex size-10 items-center justify-center rounded-full border-2 border-zinc-200 bg-white font-bold text-zinc-400">
+            <div className="mx-1 mb-6 h-0.5 min-w-4 flex-1 bg-primary sm:mx-4" />
+            <div className="flex min-w-0 flex-col items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-full border-2 border-zinc-200 bg-white text-sm font-bold text-zinc-400 sm:size-10">
                 2
               </div>
-              <span className="text-[10px] font-black tracking-widest text-zinc-400 uppercase">
+              <span className="max-w-[7ch] text-center text-[9px] font-black tracking-wider text-zinc-400 uppercase sm:max-w-none sm:text-[10px] sm:tracking-widest">
                 {t("checkoutStepPay")}
               </span>
             </div>
-            <div className="mx-4 mb-6 h-0.5 flex-1 bg-zinc-200" />
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex size-10 items-center justify-center rounded-full bg-zinc-200 font-bold text-zinc-400">
+            <div className="mx-1 mb-6 h-0.5 min-w-4 flex-1 bg-zinc-200 sm:mx-4" />
+            <div className="flex min-w-0 flex-col items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-full bg-zinc-200 text-sm font-bold text-zinc-400 sm:size-10">
                 3
               </div>
-              <span className="text-[10px] font-black tracking-widest text-zinc-400 uppercase">
+              <span className="max-w-[7ch] text-center text-[9px] font-black tracking-wider text-zinc-400 uppercase sm:max-w-none sm:text-[10px] sm:tracking-widest">
                 {t("checkoutStepReview")}
               </span>
             </div>
           </div>
 
-          <div className="border border-zinc-100 bg-white p-8 shadow-sm">
+          <div className="border border-zinc-100 bg-white p-5 shadow-sm sm:p-8">
             <div className="mb-8 flex items-center gap-4">
               <MapPin className="size-6 text-primary" aria-hidden />
               <h2 className="text-xl font-bold tracking-wider uppercase">
@@ -208,8 +208,7 @@ export function CheckoutForm() {
                 </label>
                 <input
                   id="checkout-zip"
-                  className="input-field"
-                  dir="ltr"
+                  className="input-field force-ltr"
                   placeholder={t("checkoutZipPh")}
                   value={zip}
                   onChange={(event) => setZip(event.target.value)}
@@ -223,15 +222,14 @@ export function CheckoutForm() {
                 >
                   {t("checkoutPhone")}
                 </label>
-                <div className="flex" dir="ltr">
+                <div className="force-ltr flex">
                   <span className="border border-e-0 border-zinc-200 bg-zinc-100 px-4 py-3 text-zinc-500">
                     +216
                   </span>
                   <input
                     id="checkout-phone"
                     type="tel"
-                    className="input-field"
-                    dir="ltr"
+                    className="input-field force-ltr"
                     placeholder={t("checkoutPhonePh")}
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
@@ -243,7 +241,7 @@ export function CheckoutForm() {
             </div>
           </div>
 
-          <div className="border border-zinc-100 bg-white p-8 shadow-sm">
+          <div className="border border-zinc-100 bg-white p-5 shadow-sm sm:p-8">
             <div className="mb-8 flex items-center gap-4">
               <Truck className="size-6 text-primary" aria-hidden />
               <h2 className="text-xl font-bold tracking-wider uppercase">
@@ -256,7 +254,7 @@ export function CheckoutForm() {
             </div>
           </div>
 
-          <div className="border border-zinc-100 bg-white p-8 shadow-sm">
+          <div className="border border-zinc-100 bg-white p-5 shadow-sm sm:p-8">
             <div className="mb-8 flex items-center gap-4">
               <CreditCard className="size-6 text-primary" aria-hidden />
               <h2 className="text-xl font-bold tracking-wider uppercase">
@@ -311,7 +309,7 @@ export function CheckoutForm() {
 
         <div className="lg:col-span-4">
           <div className="sticky top-28 space-y-6">
-            <div className="bg-black p-8 text-white">
+            <div className="bg-black p-5 text-white sm:p-8">
               <h3 className="font-display mb-6 border-b border-white/10 pb-4 text-2xl tracking-wider">
                 {t("checkoutSummary")}
               </h3>

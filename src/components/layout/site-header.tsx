@@ -32,7 +32,7 @@ function DesktopNav() {
   const category = searchParams.get("categorie");
 
   return (
-    <ul className="site-nav hidden list-none items-center gap-5 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex xl:gap-8">
+    <ul className="site-nav hidden list-none items-center gap-4 text-[11px] font-extrabold tracking-[0.12em] uppercase xl:flex xl:gap-8 xl:text-xs xl:tracking-[0.2em]">
       {NAV_LINKS.map((item) => {
         const active = navLinkActive(item.href, pathname, category);
         return (
@@ -58,8 +58,7 @@ function LanguageToggle() {
 
   return (
     <div
-      dir="ltr"
-      className="flex border border-line text-[11px] font-black tracking-[0.08em]"
+      className="force-ltr flex border border-line text-[10px] font-black tracking-[0.08em] sm:text-[11px]"
       role="group"
       aria-label={t("language")}
     >
@@ -71,8 +70,8 @@ function LanguageToggle() {
             type="button"
             className={
               active
-                ? "bg-primary px-2.5 py-1.5 text-black"
-                : "bg-transparent px-2.5 py-1.5 text-zinc-500"
+                ? "bg-primary px-2 py-1 text-black sm:px-2.5 sm:py-1.5"
+                : "bg-transparent px-2 py-1 text-zinc-500 sm:px-2.5 sm:py-1.5"
             }
             aria-pressed={active}
             onClick={() => setLocale(code as Locale)}
@@ -194,16 +193,16 @@ export function SiteHeader() {
 
   return (
     <>
-      <div className="sticky top-0 z-50" dir="ltr">
-        <p className="border-b border-white/10 bg-black px-4 py-2.5 text-center text-[10px] font-bold leading-relaxed tracking-[0.25em] text-primary uppercase md:text-xs">
+      <div className="force-ltr sticky top-0 z-50">
+        <p className="border-b border-white/10 bg-black px-3 py-2 text-center text-[9px] font-bold leading-relaxed tracking-[0.12em] text-primary uppercase sm:px-4 sm:py-2.5 sm:text-[10px] sm:tracking-[0.25em] md:text-xs">
           {t("ticker")}
         </p>
         <nav className="border-b border-black/5 bg-white">
-          <div className={`${WRAP} flex h-20 items-center justify-between`}>
+          <div className={`${WRAP} flex h-16 min-w-0 items-center justify-between gap-3 sm:h-20`}>
             <SiteLogo />
             <Suspense
               fallback={
-                <ul className="site-nav hidden list-none items-center gap-5 text-xs font-extrabold tracking-[0.2em] uppercase lg:flex xl:gap-8">
+                <ul className="site-nav hidden list-none items-center gap-4 text-[11px] font-extrabold tracking-[0.12em] uppercase xl:flex xl:gap-8 xl:text-xs xl:tracking-[0.2em]">
                   {NAV_LINKS.map((item) => (
                     <li key={item.href + item.labelKey}>
                       <Link
@@ -219,7 +218,7 @@ export function SiteHeader() {
             >
               <DesktopNav />
             </Suspense>
-            <div className="flex items-center gap-6">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-4 lg:gap-6">
               <LanguageToggle />
               <Link
                 href="/catalogue"
@@ -231,7 +230,7 @@ export function SiteHeader() {
               <CartButton />
               <button
                 type="button"
-                className="flex size-10 items-center justify-center text-black transition-all hover:scale-110 hover:text-primary lg:hidden"
+                className="flex size-10 items-center justify-center text-black transition-all hover:scale-110 hover:text-primary xl:hidden"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-nav"
                 aria-label={menuOpen ? t("menuClose") : t("menuOpen")}
@@ -251,7 +250,7 @@ export function SiteHeader() {
       <CartDrawer />
 
       {menuOpen ? (
-        <div className="fixed inset-0 z-[80] lg:hidden">
+        <div className="fixed inset-0 z-[80] xl:hidden">
           <button
             type="button"
             className="absolute inset-0 bg-black/45"

@@ -15,7 +15,7 @@ export function PartnersBar() {
         <span className="text-[11px] font-black tracking-[0.22em] text-zinc-400 uppercase">
           {t("recommendedBy")}
         </span>
-        <div className="font-display flex flex-wrap gap-10 text-2xl tracking-[0.04em] text-black/40" dir="ltr">
+        <div className="force-ltr font-display flex flex-wrap gap-x-6 gap-y-3 text-xl tracking-[0.04em] text-black/40 sm:gap-10 sm:text-2xl">
           {PARTNER_NAMES.map((name) => (
             <span key={name}>{name}</span>
           ))}

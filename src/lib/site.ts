@@ -1,6 +1,6 @@
 import type { TranslationKey } from "@/lib/i18n";
 
-export const WRAP = "mx-auto w-full max-w-[1440px] px-6";
+export const WRAP = "mx-auto w-full max-w-[1440px] px-4 sm:px-6";
 
 export const PARTNER_NAMES = [
   "IRON CLUB",

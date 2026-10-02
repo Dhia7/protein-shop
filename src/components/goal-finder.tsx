@@ -68,7 +68,7 @@ export function GoalFinder() {
             <RevealItem key={goal.num}>
             <Link
               href={goal.href}
-              className="goal-card group relative z-0 flex min-h-[420px] flex-col overflow-hidden border border-line bg-white no-underline md:min-h-[480px]"
+              className="goal-card group relative z-0 flex min-h-[320px] flex-col overflow-hidden border border-line bg-white no-underline md:min-h-[480px]"
             >
               <div className="relative min-h-[240px] flex-1 overflow-hidden bg-zinc-100">
                 <div className="goal-card-visual absolute inset-0">

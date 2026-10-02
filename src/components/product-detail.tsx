@@ -106,7 +106,7 @@ export function ProductDetail({
 
   return (
     <div className="bg-grid bg-white pb-28">
-      <div className={`${WRAP} py-12`}>
+      <div className={`${WRAP} py-8 md:py-12`}>
         <nav
           className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-black tracking-widest text-zinc-400 uppercase"
           aria-label="Breadcrumb"
@@ -122,14 +122,14 @@ export function ProductDetail({
             {t(CATEGORY_LABEL_KEYS[product.category])}
           </Link>
           <ChevronRight className="size-3 rtl:rotate-180" aria-hidden />
-          <span className="text-black" dir="ltr">{product.name}</span>
+          <span className="force-ltr text-black">{product.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="space-y-6 lg:col-span-6">
             <div
               ref={imageRef}
-              className="group relative overflow-hidden border-2 border-zinc-100 bg-white p-8 md:p-12"
+              className="group relative overflow-hidden border-2 border-zinc-100 bg-white p-4 md:p-12"
             >
               <div className="diagonal-stripe absolute top-0 end-0 z-0 size-32 translate-x-16 -translate-y-16 rotate-45 rtl:-translate-x-16" />
               {tagLabel ? (
@@ -178,8 +178,8 @@ export function ProductDetail({
                   {t("inStock")}
                 </span>
               </div>
-              <h1 className="section-display text-6xl leading-none text-black">
-                <span dir="ltr" className="font-display">
+              <h1 className="section-display text-[clamp(2.15rem,9vw,3.75rem)] leading-none text-black">
+                <span className="force-ltr font-display">
                   {product.name}
                 </span>
                 <br />
@@ -190,7 +190,7 @@ export function ProductDetail({
             </div>
 
             <div className="flex items-baseline gap-4 border-b border-zinc-100 pb-8">
-              <span className="font-display text-5xl tracking-wide" dir="ltr">
+              <span className="force-ltr font-display text-[clamp(2rem,8vw,3rem)] tracking-wide">
                 {product.price}
               </span>
             </div>
@@ -201,7 +201,7 @@ export function ProductDetail({
                   {t("flavour")}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase" dir="ltr">
+                  <span className="force-ltr border-2 border-black px-4 py-2 text-sm font-bold uppercase">
                     {product.flavour}
                   </span>
                 </div>
@@ -211,12 +211,12 @@ export function ProductDetail({
                   {t("format")}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="border-2 border-black px-4 py-2 text-sm font-bold uppercase" dir="ltr">
+                  <span className="force-ltr border-2 border-black px-4 py-2 text-sm font-bold uppercase">
                     {product.size}
                   </span>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-6 pt-4">
+              <div className="flex w-full flex-col items-stretch gap-4 pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
                 <QuantityStepper
                   size="lg"
                   value={quantity}
@@ -229,7 +229,7 @@ export function ProductDetail({
                 <button
                   type="button"
                   className={cn(
-                    "btn-primary flex-1",
+                    "btn-primary w-full sm:flex-1",
                     justAdded && "add-flash",
                   )}
                   onClick={handleAdd}
@@ -256,7 +256,7 @@ export function ProductDetail({
           </div>
         </div>
 
-        <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-12">
+        <div className="mt-12 grid grid-cols-1 gap-10 lg:mt-24 lg:grid-cols-12 lg:gap-16">
           <div className="space-y-6 lg:col-span-8">
             <h2 className="font-display text-4xl text-black">
               {t("pdpDescriptionTitle")}
@@ -269,7 +269,7 @@ export function ProductDetail({
               <ul className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2">
                 <li className="flex items-center gap-2 text-xs font-bold uppercase">
                   <Check className="size-4 text-primary" aria-hidden />
-                  <span dir="ltr">{product.detail}</span>
+                  <span className="force-ltr">{product.detail}</span>
                 </li>
                 <li className="flex items-center gap-2 text-xs font-bold uppercase">
                   <Check className="size-4 text-primary" aria-hidden />
@@ -282,7 +282,7 @@ export function ProductDetail({
           </div>
 
           <div className="lg:col-span-4">
-            <div className="sticky top-28 border-t-8 border-primary bg-black p-8 text-white">
+            <div className="sticky top-28 border-t-8 border-primary bg-black p-5 text-white sm:p-8">
               <h3 className="font-display mb-6 text-3xl tracking-wide">
                 {t("productFacts")}
               </h3>
@@ -296,8 +296,10 @@ export function ProductDetail({
                       {row.label}
                     </span>
                     <span
-                      className="font-display text-xl text-end"
-                      dir={"latin" in row && row.latin ? "ltr" : undefined}
+                      className={cn(
+                        "font-display text-xl text-end",
+                        "latin" in row && row.latin && "force-ltr",
+                      )}
                     >
                       {row.value}
                     </span>
@@ -328,7 +330,7 @@ export function ProductDetail({
 
       <div
         className={cn(
-          "sticky-add-bar fixed inset-x-0 bottom-0 z-[55] border-t border-line bg-white/95 backdrop-blur-[8px] transition-transform duration-300",
+          "sticky-add-bar fixed inset-x-0 bottom-0 z-[55] border-t border-line bg-white/95 pb-[max(0px,env(safe-area-inset-bottom))] backdrop-blur-[8px] transition-transform duration-300",
           showBar ? "translate-y-0" : "translate-y-full",
         )}
         aria-hidden={!showBar}
@@ -351,15 +353,17 @@ export function ProductDetail({
             </div>
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <QuantityStepper
-              size="sm"
-              value={quantity}
-              onChange={setQuantity}
-              max={99}
-              label={t("quantity")}
-              decreaseLabel={t("decreaseQty")}
-              increaseLabel={t("increaseQty")}
-            />
+            <div className="hidden sm:block">
+              <QuantityStepper
+                size="sm"
+                value={quantity}
+                onChange={setQuantity}
+                max={99}
+                label={t("quantity")}
+                decreaseLabel={t("decreaseQty")}
+                increaseLabel={t("increaseQty")}
+              />
+            </div>
             <button
               type="button"
               className="inline-flex h-10 items-center justify-center bg-primary px-4 text-xs font-extrabold tracking-[0.08em] text-black uppercase sm:px-5 sm:text-sm"

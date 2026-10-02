@@ -28,9 +28,8 @@ export function QuantityStepper({
 
   return (
     <div
-      dir="ltr"
       className={cn(
-        "flex items-center bg-white",
+        "force-ltr flex items-center bg-white",
         large
           ? "qty-box"
           : boxed

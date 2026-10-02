@@ -83,7 +83,7 @@ export function ProductCard({
         <div className="flex items-start justify-between gap-2">
           <span className="text-[9px] font-black tracking-widest text-zinc-400 uppercase">
             {catalog ? (
-              <span dir="ltr">{t("brandOurs")}</span>
+              <span className="force-ltr">{t("brandOurs")}</span>
             ) : (
               t(CATEGORY_LABEL_KEYS[product.category])
             )}
@@ -92,18 +92,17 @@ export function ProductCard({
         <h3 className="text-base leading-tight font-bold uppercase">
           <Link
             href={href}
-            className="text-foreground no-underline transition-colors group-hover:text-primary"
-            dir="ltr"
+            className="force-ltr text-foreground no-underline transition-colors group-hover:text-primary"
           >
             {product.name}
           </Link>
         </h3>
         {!compact && !catalog && product.detail ? (
-          <p className="text-xs text-zinc-500" dir="ltr">{product.detail}</p>
+          <p className="force-ltr text-xs text-zinc-500">{product.detail}</p>
         ) : null}
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-          <p className="font-display text-3xl leading-none" dir="ltr">{product.price}</p>
+          <p className="force-ltr font-display text-3xl leading-none">{product.price}</p>
           <div className="flex items-center gap-2">
             {catalog ? null : (
               <div

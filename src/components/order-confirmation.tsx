@@ -55,7 +55,7 @@ export function OrderConfirmation() {
 
   return (
     <div className="flex flex-1 flex-col bg-zinc-50">
-      <header className="diagonal-header confirm-banner relative overflow-hidden py-24">
+      <header className="diagonal-header confirm-banner relative overflow-hidden py-16 md:py-24">
         <div
           className={`${WRAP} relative z-10 flex flex-col items-center text-center`}
         >
@@ -68,7 +68,7 @@ export function OrderConfirmation() {
             <Check className="size-12 text-primary" strokeWidth={3} aria-hidden />
           </motion.div>
           <motion.h1
-            className="font-display mb-4 text-6xl leading-none text-black md:text-8xl"
+            className="font-display mb-4 text-[clamp(2.5rem,12vw,6rem)] leading-none text-black md:text-8xl"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.12 }}
@@ -76,7 +76,7 @@ export function OrderConfirmation() {
             {t("confirmTitle")}
           </motion.h1>
           <motion.p
-            className="text-sm font-black tracking-[0.3em] text-black uppercase italic md:text-lg"
+            className="text-sm font-black tracking-[0.16em] text-black uppercase italic sm:tracking-[0.3em] md:text-lg"
             initial={reduced ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.22 }}
@@ -84,7 +84,7 @@ export function OrderConfirmation() {
             {t("confirmLead")}
           </motion.p>
         </div>
-        <div className="pointer-events-none absolute top-0 -end-20 font-display text-[300px] text-black/5 select-none" dir="ltr">
+        <div className="force-ltr pointer-events-none absolute top-0 -end-20 font-display text-[300px] text-black/5 select-none">
           OK
         </div>
       </header>
@@ -92,7 +92,7 @@ export function OrderConfirmation() {
       <div className={`${WRAP} relative z-20 -mt-16 pb-24`}>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-8">
-            <div className="border border-zinc-200 bg-white p-8 shadow-[20px_20px_0_rgba(0,0,0,0.05)] md:p-12">
+            <div className="border border-zinc-200 bg-white p-5 shadow-[20px_20px_0_rgba(0,0,0,0.05)] sm:p-8 md:p-12">
               <div className="mb-10 flex flex-col justify-between gap-6 border-b border-zinc-100 pb-8 md:flex-row md:items-center">
                 <div className="space-y-1">
                   <span className="text-[10px] font-black tracking-widest text-zinc-400 uppercase">
@@ -135,10 +135,10 @@ export function OrderConfirmation() {
                         ) : null}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h4 className="text-lg leading-tight font-bold uppercase" dir="ltr">
+                        <h4 className="force-ltr text-lg leading-tight font-bold uppercase">
                           {item.name}
                         </h4>
-                        <p className="text-xs font-bold tracking-widest text-zinc-500 uppercase" dir="ltr">
+                        <p className="force-ltr text-xs font-bold tracking-widest text-zinc-500 uppercase">
                           {item.flavour} | {item.size}
                         </p>
                       </div>
@@ -166,7 +166,7 @@ export function OrderConfirmation() {
                 </div>
                 <div className="flex items-center justify-between pt-4">
                   <span className="font-display text-4xl">{t("cartTotal")}</span>
-                  <span className="font-display text-5xl">
+                  <span className="font-display text-[clamp(1.75rem,8vw,3rem)]">
                     {formatPrice(order.subtotal)}
                   </span>
                 </div>
@@ -174,12 +174,12 @@ export function OrderConfirmation() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div className="space-y-4 bg-black p-8 text-white">
+              <div className="space-y-4 bg-black p-5 text-white sm:p-8">
                 <MessageCircle className="size-8 text-primary" aria-hidden />
                 <h4 className="font-display text-2xl">{t("confirmWaTitle")}</h4>
                 <p className="text-sm text-zinc-400">{t("confirmWaBody")}</p>
               </div>
-              <div className="space-y-4 border border-zinc-200 bg-white p-8 shadow-[20px_20px_0_rgba(0,0,0,0.05)]">
+              <div className="space-y-4 border border-zinc-200 bg-white p-5 shadow-[20px_20px_0_rgba(0,0,0,0.05)] sm:p-8">
                 <PhoneCall className="size-8 text-primary" aria-hidden />
                 <h4 className="font-display text-2xl text-black">
                   {t("confirmSupport")}
@@ -192,7 +192,7 @@ export function OrderConfirmation() {
           </div>
 
           <div className="space-y-6 lg:col-span-4">
-            <div className="space-y-6 bg-zinc-900 p-8 text-white">
+            <div className="space-y-6 bg-zinc-900 p-5 text-white sm:p-8">
               <h3 className="font-display text-3xl text-primary">
                 {t("checkoutTitle")}
               </h3>
